@@ -5,6 +5,9 @@ identifies mechanisms regulating antibody production*
 
 This paper introduces secRecon, a comprehensive reconstruction of the mammalian secretory pathway, highlighting its utility in contextualizing omics data and uncovering subprocess- to gene-level insights into secretory phenotypes. The repository includes multiple modules to facilitate the analysis of the secretory pathway over multiple species, cell types, and biological conditions. The repository is structured into several folders, each applying secRecon to a different dataset and addressing specific questions linking secretory machinery to phenotypes of interest.
 
+### Supplementary Data
+In addition to the code and scripts provided in this repository, the supplementary data accompanying the analyses are hosted on Synapse.org and can be accessed via the DOI: https://doi.org/10.7303/syn64026567.
+
 ## 1 - Network Reconstruction
 
 This folder, **01 - Network Reconstruction**, contains all the essential code used to map data from different databases and datasets into secRecon and the Functional and PPI networkl topology generation.
