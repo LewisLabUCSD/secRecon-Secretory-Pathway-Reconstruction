@@ -1,0 +1,2092 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   class="main-svg"
+   width="840"
+   height="720"
+   viewBox="0 0 840 720"
+   version="1.1"
+   id="svg758"
+   sodipodi:docname="sunburst_subsystems.svg"
+   inkscape:version="1.2.1 (9c6d41e, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview760"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.63177752"
+     inkscape:cx="662.41673"
+     inkscape:cy="466.14511"
+     inkscape:window-width="1342"
+     inkscape:window-height="785"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg758" />
+  <rect
+     x="0"
+     y="0"
+     width="1200"
+     height="1000"
+     style="fill:#000000;fill-opacity:0"
+     id="rect2" />
+  <defs
+     id="defs-5965fa">
+    <g
+       class="clips"
+       id="g4" />
+    <g
+       class="gradients"
+       id="g6" />
+    <g
+       class="patterns"
+       id="g8" />
+  </defs>
+  <g
+     class="bglayer"
+     id="g11" />
+  <g
+     class="layer-below"
+     id="g17">
+    <g
+       class="imagelayer"
+       id="g13" />
+    <g
+       class="shapelayer"
+       id="g15" />
+  </g>
+  <g
+     class="cartesianlayer"
+     id="g19" />
+  <g
+     class="polarlayer"
+     id="g21" />
+  <g
+     class="smithlayer"
+     id="g23" />
+  <g
+     class="ternarylayer"
+     id="g25" />
+  <g
+     class="geolayer"
+     id="g27" />
+  <g
+     class="funnelarealayer"
+     id="g29" />
+  <g
+     class="pielayer"
+     id="g31" />
+  <g
+     class="iciclelayer"
+     id="g33" />
+  <g
+     class="treemaplayer"
+     id="g35" />
+  <g
+     class="glimages"
+     id="g657" />
+  <defs
+     id="topdefs-5965fa">
+    <g
+       class="clips"
+       id="g659" />
+  </defs>
+  <g
+     id="g3228"
+     transform="matrix(0.63322412,0,0,0.63322412,-16.760776,1.036056)">
+    <g
+       class="layer-above"
+       id="g682"
+       transform="matrix(-0.00249807,1.0581413,-0.54613625,-0.02023475,211.82718,-566.19951)">
+      <g
+         class="imagelayer"
+         id="g662" />
+      <g
+         class="shapelayer"
+         id="g680">
+        <g
+           class="shape-group"
+           data-index="0"
+           id="g666"
+           transform="matrix(0.53449407,0.00214249,0.00895716,1.0028523,388.74735,-79.112435)">
+          <path
+             data-index="0"
+             fill-rule="evenodd"
+             d="M 912,146 A 312,258 0 1 1 600,-112 312,258 0 0 1 912,146 Z"
+             style="opacity:1;fill:#000000;fill-opacity:0;stroke:#4169e1;stroke-width:4px;stroke-opacity:1"
+             id="path664" />
+        </g>
+        <g
+           class="shape-group"
+           data-index="1"
+           id="g670"
+           transform="matrix(0.58298898,0.0022348,0.00934311,1.0715279,315.23317,-90.392565)">
+          <path
+             data-index="1"
+             fill-rule="evenodd"
+             d="M 808,146 A 208,215 0 1 1 600,-69 208,215 0 0 1 808,146 Z"
+             style="opacity:1;fill:#000000;fill-opacity:0;stroke:#87cefa;stroke-width:4px;stroke-opacity:1"
+             id="path668" />
+        </g>
+        <g
+           class="shape-group"
+           data-index="2"
+           id="g674"
+           transform="matrix(0.86570162,0.00167856,0.00701758,1.2326416,114.6321,-115.74005)">
+          <path
+             data-index="2"
+             fill-rule="evenodd"
+             d="M 704,146 A 104,172 0 1 1 600,-26 104,172 0 0 1 704,146 Z"
+             style="opacity:1;fill:#000000;fill-opacity:0;stroke:#90ee90;stroke-width:4px;stroke-opacity:1"
+             id="path672" />
+        </g>
+        <g
+           class="shape-group"
+           data-index="3"
+           id="g678"
+           transform="matrix(0.85045107,0.00176833,0.00739288,1.2370158,78.488268,-113.18807)">
+          <path
+             data-index="3"
+             fill-rule="evenodd"
+             d="M 652,146 A 52,129 0 1 1 600,17 52,129 0 0 1 652,146 Z"
+             style="opacity:1;fill:#25e73b;fill-opacity:0;stroke:#9acd32;stroke-width:4px;stroke-opacity:1"
+             id="path676" />
+        </g>
+      </g>
+    </g>
+    <g
+       class="infolayer"
+       id="g756"
+       transform="translate(-428.36167,72.794069)">
+      <g
+         class="g-gtitle"
+         id="g684" />
+      <g
+         class="annotation"
+         data-index="0"
+         style="opacity:1"
+         id="g694">
+        <g
+           class="annotation-text-g"
+           id="g692">
+          <g
+             class="cursor-pointer"
+             transform="translate(531,-26)"
+             id="g690">
+            <rect
+               class="bg"
+               x="0.5"
+               y="0.5"
+               width="138"
+               height="47"
+               style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1px;stroke-opacity:0"
+               id="rect686" />
+            <text
+               class="annotation-text"
+               text-anchor="middle"
+               x="69.671875"
+               y="38"
+               style="font-size:36px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#2a3f5f;fill-opacity:1"
+               id="text688">System</text>
+          </g>
+        </g>
+      </g>
+      <g
+         class="annotation"
+         data-index="1"
+         style="opacity:1"
+         id="g704"
+         transform="translate(0,14)">
+        <g
+           class="annotation-text-g"
+           id="g702">
+          <g
+             class="cursor-pointer"
+             transform="translate(586,17)"
+             id="g700">
+            <rect
+               class="bg"
+               x="0.5"
+               y="0.5"
+               width="27"
+               height="32"
+               style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1px;stroke-opacity:0"
+               id="rect696" />
+            <text
+               class="annotation-text"
+               text-anchor="middle"
+               x="14"
+               y="26"
+               style="font-size:24px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#2a3f5f;fill-opacity:1"
+               id="text698">⬇</text>
+          </g>
+        </g>
+      </g>
+      <g
+         class="annotation"
+         data-index="2"
+         style="opacity:1"
+         id="g714">
+        <g
+           class="annotation-text-g"
+           id="g712">
+          <g
+             class="cursor-pointer"
+             transform="translate(510,60)"
+             id="g710">
+            <rect
+               class="bg"
+               x="0.5"
+               y="0.5"
+               width="180"
+               height="42"
+               style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1px;stroke-opacity:0"
+               id="rect706" />
+            <text
+               class="annotation-text"
+               text-anchor="middle"
+               x="90.578125"
+               y="34"
+               style="font-size:32px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#2a3f5f;fill-opacity:1"
+               id="text708">Subsystem</text>
+          </g>
+        </g>
+      </g>
+      <g
+         class="annotation"
+         data-index="3"
+         style="opacity:1"
+         id="g724"
+         transform="translate(0,20)">
+        <g
+           class="annotation-text-g"
+           id="g722">
+          <g
+             class="cursor-pointer"
+             transform="translate(586,103)"
+             id="g720">
+            <rect
+               class="bg"
+               x="0.5"
+               y="0.5"
+               width="27"
+               height="32"
+               style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1px;stroke-opacity:0"
+               id="rect716" />
+            <text
+               class="annotation-text"
+               text-anchor="middle"
+               x="14"
+               y="26"
+               style="font-size:24px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#2a3f5f;fill-opacity:1"
+               id="text718">⬇</text>
+          </g>
+        </g>
+      </g>
+      <g
+         class="annotation"
+         data-index="4"
+         style="opacity:1"
+         id="g734">
+        <g
+           class="annotation-text-g"
+           id="g732">
+          <g
+             class="cursor-pointer"
+             transform="translate(545,146)"
+             id="g730">
+            <rect
+               class="bg"
+               x="0.5"
+               y="0.5"
+               width="109"
+               height="37"
+               style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1px;stroke-opacity:0"
+               id="rect726" />
+            <text
+               class="annotation-text"
+               text-anchor="middle"
+               x="55.140625"
+               y="30"
+               style="font-size:28px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#2a3f5f;fill-opacity:1"
+               id="text728">Process</text>
+          </g>
+        </g>
+      </g>
+      <g
+         class="annotation"
+         data-index="5"
+         style="opacity:1"
+         id="g744"
+         transform="translate(0,8)">
+        <g
+           class="annotation-text-g"
+           id="g742">
+          <g
+             class="cursor-pointer"
+             transform="translate(586,189)"
+             id="g740">
+            <rect
+               class="bg"
+               x="0.5"
+               y="0.5"
+               width="27"
+               height="32"
+               style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1px;stroke-opacity:0"
+               id="rect736" />
+            <text
+               class="annotation-text"
+               text-anchor="middle"
+               x="14"
+               y="26"
+               style="font-size:24px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#2a3f5f;fill-opacity:1"
+               id="text738">⬇</text>
+          </g>
+        </g>
+      </g>
+      <g
+         class="annotation"
+         data-index="6"
+         style="opacity:1"
+         id="g754">
+        <g
+           class="annotation-text-g"
+           id="g752">
+          <g
+             class="cursor-pointer"
+             transform="translate(529,232)"
+             id="g750">
+            <rect
+               class="bg"
+               x="0.5"
+               y="0.5"
+               width="141"
+               height="32"
+               style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1px;stroke-opacity:0"
+               id="rect746" />
+            <text
+               class="annotation-text"
+               text-anchor="middle"
+               x="71.0625"
+               y="26"
+               style="font-size:24px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#2a3f5f;fill-opacity:1"
+               id="text748">Subprocess</text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     class="sunburstlayer"
+     id="g8984"
+     transform="translate(-194.72765,-98.803151)">
+    <g
+       class="trace sunburst"
+       stroke-linejoin="round"
+       style="opacity:1"
+       id="g8982">
+      <g
+         class="slice cursor-pointer"
+         id="g8372">
+        <path
+           class="surface"
+           d="M 600,490 H 707.5 A 107.5,107.5 0 0 0 503.84264,441.93742 Z"
+           style="fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8366" />
+        <g
+           class="slicetext"
+           id="g8370">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.39606562,0.09347041,-0.09347041,0.39606562,608.38721,454.46057)"
+             id="text8368">Post-translational modifications</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8380">
+        <path
+           class="surface"
+           d="m 600,490 -96.15736,-48.06258 a 107.5,107.5 0 0 0 66.11265,151.27869 z"
+           style="fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8374" />
+        <g
+           class="slicetext"
+           id="g8378">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.18596712,0.42552918,-0.42552918,0.18596712,527.47953,521.6933)"
+             id="text8376">Vesicle trafficking</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8388">
+        <path
+           class="surface"
+           d="M 600,490 569.95529,593.21611 A 107.5,107.5 0 0 0 693.55566,542.94892 Z"
+           style="fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8382" />
+        <g
+           class="slicetext"
+           id="g8386">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.47454027,-0.1929914,0.1929914,0.47454027,633.55059,572.49644)"
+             id="text8384">Proteostasis</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8396">
+        <path
+           class="surface"
+           d="m 600,490 93.55566,52.94892 a 107.5,107.5 0 0 0 11.67133,-30.95957 z"
+           style="fill:#ef553b;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8390" />
+        <g
+           class="slicetext"
+           id="g8394">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.26359929,0.09937323,-0.09937323,0.26359929,667.24547,519.41493)"
+             id="text8392">Translocation</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8404">
+        <path
+           class="surface"
+           d="m 600,490 105.22699,21.98935 A 107.5,107.5 0 0 0 707.5,490 Z"
+           style="fill:#636efa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8398" />
+        <g
+           class="slicetext"
+           id="g8402">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#ffffff;fill-opacity:1"
+             transform="matrix(0.18154257,0.01876585,-0.01876585,0.18154257,672.24126,499.94451)"
+             id="text8400">Protein conformation</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8412">
+        <path
+           class="surface"
+           d="M 707.5,490 H 815 A 215,215 0 0 0 605.5358,275.07128 l -2.7679,107.46436 A 107.5,107.5 0 0 1 707.5,490 Z"
+           style="fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8406" />
+        <g
+           class="slicetext"
+           id="g8410">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="rotate(45.737705,-112.97263,1027.096)"
+             id="text8408">Glycosylation</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8420">
+        <path
+           class="surface"
+           d="m 602.7679,382.53564 2.7679,-107.46436 a 215,215 0 0 0 -65.62521,8.4965 l 30.0447,103.21611 a 107.5,107.5 0 0 1 32.81261,-4.24825 z"
+           style="fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8414" />
+        <g
+           class="slicetext"
+           id="g8418">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.0706458,0.54565376,-0.54565376,0.0706458,571.94953,331.19361)"
+             id="text8416">Acetylation</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8428">
+        <path
+           class="surface"
+           d="M 569.95529,386.78389 539.91059,283.56778 A 215,215 0 0 0 498.955,300.22406 l 50.5225,94.88797 a 107.5,107.5 0 0 1 20.47779,-8.32814 z"
+           style="fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8422" />
+        <g
+           class="slicetext"
+           id="g8426">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.16694079,0.41048529,-0.41048529,0.16694079,533.74932,342.978)"
+             id="text8424">Carboxylation</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8436">
+        <path
+           class="surface"
+           d="M 549.4775,395.11203 498.955,300.22406 a 215,215 0 0 0 -36.68253,24.68164 l 68.86376,82.54715 a 107.5,107.5 0 0 1 18.34127,-12.34082 z"
+           style="fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8430" />
+        <g
+           class="slicetext"
+           id="g8434">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.21341067,0.31717675,-0.31717675,0.21341067,505.74349,359.15831)"
+             id="text8432">Phosphorylation</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8444">
+        <path
+           class="surface"
+           d="M 531.13623,407.45285 462.27247,324.9057 a 215,215 0 0 0 -16.24519,15.03631 l 76.98636,75.02899 a 107.5,107.5 0 0 1 8.12259,-7.51815 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8438" />
+        <g
+           class="slicetext"
+           id="g8442">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.25200752,0.27226835,-0.27226835,0.25200752,471.80123,358.86758)"
+             id="text8440">Lipidation</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8452">
+        <path
+           class="surface"
+           d="m 523.01364,414.971 -76.98636,-75.02899 a 215,215 0 0 0 -14.61304,16.62695 l 84.29288,66.71552 a 107.5,107.5 0 0 1 7.30652,-8.31348 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8446" />
+        <g
+           class="slicetext"
+           id="g8450">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.24584666,0.21606882,-0.21606882,0.24584666,466.08863,378.19101)"
+             id="text8448">Hydroxylysine</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8460">
+        <path
+           class="surface"
+           d="m 515.70712,423.28448 -84.29288,-66.71552 a 215,215 0 0 0 -12.82599,18.04136 l 90.70588,57.69484 a 107.5,107.5 0 0 1 6.41299,-9.02068 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8454" />
+        <g
+           class="slicetext"
+           id="g8458">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.20232036,0.14383387,-0.14383387,0.20232036,466.66089,399.31813)"
+             id="text8456">Disulfide bond formation</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8468">
+        <path
+           class="surface"
+           d="m 509.29413,432.30516 -90.70588,-57.69484 a 215,215 0 0 0 -10.90297,19.26451 l 96.15736,48.06259 a 107.5,107.5 0 0 1 5.45149,-9.63226 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8462" />
+        <g
+           class="slicetext"
+           id="g8466">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.31034719,0.17564461,-0.17564461,0.31034719,440.64704,405.34403)"
+             id="text8464">O-sulfation</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8476">
+        <path
+           class="surface"
+           d="m 503.84264,441.93742 -96.15736,-48.06259 a 215,215 0 0 0 -15.59624,150.87946 l 103.95548,-27.37714 a 107.5,107.5 0 0 1 7.79812,-75.43973 z"
+           style="fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8470" />
+        <g
+           class="slicetext"
+           id="g8474">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.07517023,-0.72720377,0.72720377,0.07517023,421.18288,471.51588)"
+             id="text8472">Post-Golgi</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8484">
+        <path
+           class="surface"
+           d="m 496.04452,517.37715 -103.95548,27.37714 a 215,215 0 0 0 39.3252,78.67675 l 84.29288,-66.71552 a 107.5,107.5 0 0 1 -19.6626,-39.33837 z"
+           style="fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8478" />
+        <g
+           class="slicetext"
+           id="g8482">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.59075631,-0.29527926,0.29527926,0.59075631,459.94754,569.95892)"
+             id="text8480">Pre-Golgi</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8492">
+        <path
+           class="surface"
+           d="m 515.70712,556.71552 -84.29288,66.71552 a 215,215 0 0 0 14.61304,16.62695 L 523.01364,565.029 a 107.5,107.5 0 0 1 -7.30652,-8.31348 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8486" />
+        <g
+           class="slicetext"
+           id="g8490">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.2217771,-0.19491466,0.19491466,0.2217771,476.51516,603.82839)"
+             id="text8488">Golgi organization</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8500">
+        <path
+           class="surface"
+           d="m 523.01364,565.029 -76.98636,75.02899 a 215,215 0 0 0 16.24519,15.03631 l 68.86376,-82.54715 a 107.5,107.5 0 0 1 -8.12259,-7.51815 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8494" />
+        <g
+           class="slicetext"
+           id="g8498">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.17221084,-0.1860562,0.1860562,0.17221084,492.99863,610.63674)"
+             id="text8496">Cytoskeletal remodeling</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8508">
+        <path
+           class="surface"
+           d="m 531.13623,572.54715 -68.86376,82.54715 a 215,215 0 0 0 17.70513,13.28626 l 60.0112,-89.19028 a 107.5,107.5 0 0 1 -8.85257,-6.64313 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8502" />
+        <g
+           class="slicetext"
+           id="g8506">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.11890935,-0.15845735,0.15845735,0.11890935,505.36435,620.56124)"
+             id="text8504">Autophagy (Vesicle trafficking)</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8516">
+        <path
+           class="surface"
+           d="m 539.9888,579.19028 -60.0112,89.19028 a 215,215 0 0 0 18.9774,11.39538 l 50.5225,-94.88797 a 107.5,107.5 0 0 1 -9.4887,-5.69769 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8510" />
+        <g
+           class="slicetext"
+           id="g8514">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.15536753,-0.25874265,0.25874265,0.15536753,516.39572,637.14572)"
+             id="text8512">Membrane fusion</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8524">
+        <path
+           class="surface"
+           d="m 549.4775,584.88797 -50.5225,94.88797 a 215,215 0 0 0 20.0485,9.38371 l 40.49825,-99.57982 a 107.5,107.5 0 0 1 -10.02425,-4.69186 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8518" />
+        <g
+           class="slicetext"
+           id="g8522">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.05396955,-0.11530711,0.11530711,0.05396955,533.20221,636.76463)"
+             id="text8520">Targeting to correct compartment/cargo sorting</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8532">
+        <path
+           class="surface"
+           d="m 559.50175,589.57983 -40.49825,99.57982 a 215,215 0 0 0 20.90709,7.27257 l 30.0447,-103.21611 a 107.5,107.5 0 0 1 -10.45354,-3.63628 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8526" />
+        <g
+           class="slicetext"
+           id="g8530">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.10322199,-0.29674119,0.29674119,0.10322199,547.56911,653.62259)"
+             id="text8528">Vesicle budding</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8540">
+        <path
+           class="surface"
+           d="m 569.95529,593.21611 -30.0447,103.21611 a 215,215 0 0 0 65.62521,8.4965 l -2.7679,-107.46436 a 107.5,107.5 0 0 1 -32.81261,-4.24825 z"
+           style="fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8534" />
+        <g
+           class="slicetext"
+           id="g8538">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.11814229,-0.9125069,0.9125069,0.11814229,590.57372,659.54978)"
+             id="text8536">ERAD</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8548">
+        <path
+           class="surface"
+           d="m 602.7679,597.46436 2.7679,107.46436 a 215,215 0 0 0 65.10081,-11.86354 l -35.3183,-101.53259 a 107.5,107.5 0 0 1 -32.55041,5.93177 z"
+           style="fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8542" />
+        <g
+           class="slicetext"
+           id="g8546">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.04580568,0.25135736,-0.25135736,0.04580568,625.50678,649.20688)"
+             id="text8544">ER stress response/UPR</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8556">
+        <path
+           class="surface"
+           d="m 635.31831,591.53259 35.3183,101.53259 a 215,215 0 0 0 20.50498,-8.33919 l -45.57079,-97.363 a 107.5,107.5 0 0 1 -10.25249,4.1696 z"
+           style="opacity:0.7;fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8550" />
+        <g
+           class="slicetext"
+           id="g8554">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.1398187,0.34379567,-0.34379567,0.1398187,664.4309,661.72681)"
+             id="text8552">Apoptosis</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8564">
+        <path
+           class="surface"
+           d="m 645.5708,587.36299 45.57079,97.363 a 215,215 0 0 0 19.53886,-10.40334 l -55.34022,-92.16133 a 107.5,107.5 0 0 1 -9.76943,5.20167 z"
+           style="opacity:0.7;fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8558" />
+        <g
+           class="slicetext"
+           id="g8562">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.05432483,0.10202924,-0.10202924,0.05432483,674.4047,633.05838)"
+             id="text8560">Lysosomal degradation/Glyco-conjugate degradation</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8572">
+        <path
+           class="surface"
+           d="m 655.34023,582.16132 55.34022,92.16133 a 215,215 0 0 0 18.36562,-12.35721 l -64.52303,-85.98272 a 107.5,107.5 0 0 1 -9.18281,6.1786 z"
+           style="opacity:0.7;fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8566" />
+        <g
+           class="slicetext"
+           id="g8570">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.22657301,0.33673897,-0.33673897,0.22657301,701.7645,651.06027)"
+             id="text8568">ERpQC</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8580">
+        <path
+           class="surface"
+           d="m 664.52304,575.98272 64.52303,85.98272 a 215,215 0 0 0 16.9977,-14.18009 l -73.02189,-78.89267 a 107.5,107.5 0 0 1 -8.49884,7.09004 z"
+           style="opacity:0.7;fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8574" />
+        <g
+           class="slicetext"
+           id="g8578">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.18399766,0.2205584,-0.2205584,0.18399766,703.49669,620.11486)"
+             id="text8576">ER Ca Homeostasis</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8588">
+        <path
+           class="surface"
+           d="m 673.02188,568.89268 73.02189,78.89267 a 215,215 0 0 0 15.4496,-15.85264 l -80.74669,-70.96636 a 107.5,107.5 0 0 1 -7.7248,7.92633 z"
+           style="opacity:0.7;fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8582" />
+        <g
+           class="slicetext"
+           id="g8586">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.1730258,0.16862666,-0.16862666,0.1730258,713.18407,604.85554)"
+             id="text8584">Autophagy (Proteostasis)</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8596">
+        <path
+           class="surface"
+           d="m 680.74668,560.96635 80.74669,70.96636 a 215,215 0 0 0 13.73772,-17.35717 l -87.61554,-62.28777 a 107.5,107.5 0 0 1 -6.86887,8.67858 z"
+           style="opacity:0.7;fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8590" />
+        <g
+           class="slicetext"
+           id="g8594">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.33189327,0.26268449,-0.26268449,0.33189327,748.56471,614.87223)"
+             id="text8592">MAPS</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8604">
+        <path
+           class="surface"
+           d="m 687.61555,552.28777 87.61554,62.28777 a 215,215 0 0 0 11.88024,-18.67771 l -93.55567,-52.94891 a 107.5,107.5 0 0 1 -5.94011,9.33885 z"
+           style="opacity:0.7;fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8598" />
+        <g
+           class="slicetext"
+           id="g8602">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.16010709,0.10183853,-0.10183853,0.16010709,734.66985,578.6912)"
+             id="text8600">Mislocalized protein degradation</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8612">
+        <path
+           class="surface"
+           d="m 693.55566,542.94892 93.55567,52.94891 a 215,215 0 0 0 9.8968,-19.80024 l -98.50406,-43.0488 a 107.5,107.5 0 0 1 -4.94841,9.90013 z"
+           style="opacity:0.7;fill:#ef553b;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8606" />
+        <g
+           class="slicetext"
+           id="g8610">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.18529561,0.09261678,-0.09261678,0.18529561,742.96587,564.58544)"
+             id="text8608">Co-translational translocation</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8620">
+        <path
+           class="surface"
+           d="m 698.50407,533.04879 98.50406,43.0488 a 215,215 0 0 0 7.80848,-20.7129 L 702.4083,522.69234 a 107.5,107.5 0 0 1 -3.90423,10.35645 z"
+           style="opacity:0.7;fill:#ef553b;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8614" />
+        <g
+           class="slicetext"
+           id="g8618">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.18369021,0.06924863,-0.06924863,0.18369021,749.93083,549.35406)"
+             id="text8616">Post-translational translocation</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8628">
+        <path
+           class="surface"
+           d="m 702.4083,522.69234 102.40831,32.69235 a 215,215 0 0 0 5.63736,-21.406 L 705.22699,511.98935 a 107.5,107.5 0 0 1 -2.81869,10.70299 z"
+           style="opacity:0.7;fill:#ef553b;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8622" />
+        <g
+           class="slicetext"
+           id="g8626">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.3242981,0.08540537,-0.08540537,0.3242981,769.08333,539.21052)"
+             id="text8624">TRC pathway</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8636">
+        <path
+           class="surface"
+           d="m 705.22699,511.98935 105.22698,21.98934 a 215,215 0 0 0 3.4065,-21.87218 L 706.93024,501.05326 a 107.5,107.5 0 0 1 -1.70325,10.93609 z"
+           style="opacity:0.7;fill:#636efa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8630" />
+        <g
+           class="slicetext"
+           id="g8634">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#ffffff;fill-opacity:1"
+             transform="matrix(0.31262208,0.04868959,-0.04868959,0.31262208,769.45966,520.71541)"
+             id="text8632">Multimerization</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8644">
+        <path
+           class="surface"
+           d="m 706.93024,501.05326 106.93023,11.05325 A 215,215 0 0 0 815,490 H 707.5 a 107.5,107.5 0 0 1 -0.56976,11.05326 z"
+           style="opacity:0.7;fill:#636efa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8638" />
+        <g
+           class="slicetext"
+           id="g8642">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#ffffff;fill-opacity:1"
+             transform="matrix(0.32331383,0.01666589,-0.01666589,0.32331383,773.26466,503.30256)"
+             id="text8640">Protein folding</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8652">
+        <path
+           class="surface"
+           d="M 815,490 H 922.5 A 322.5,322.5 0 0 0 880.66699,331.15325 l -93.55566,52.94892 A 215,215 0 0 1 815,490 Z"
+           style="fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8646" />
+        <g
+           class="slicetext"
+           id="g8650">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.11822369,0.44891459,-0.44891459,0.11822369,887.49555,414.28675)"
+             id="text8648">Glycosaminoglycan</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8660">
+        <path
+           class="surface"
+           d="m 787.11133,384.10217 93.55566,-52.94892 a 322.5,322.5 0 0 0 -87.09788,-99.10141 l -64.52304,85.98272 a 215,215 0 0 1 58.06526,66.06761 z"
+           style="fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8654" />
+        <g
+           class="slicetext"
+           id="g8658">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.27220435,0.30971858,-0.30971858,0.27220435,827.05091,290.45032)"
+             id="text8656">Glycosphingolipid</text>
+        </g>
+      </g>
+      <g
+         class="slice cursor-pointer"
+         id="g8668">
+        <path
+           class="surface"
+           d="m 729.04607,318.03456 64.52304,-85.98272 a 322.5,322.5 0 0 0 -56.85672,-34.14082 l -45.5708,97.36299 a 215,215 0 0 1 37.90448,22.76055 z"
+           style="fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8662" />
+        <g
+           class="slicetext"
+           id="g8666">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.35506756,-0.59131482,0.59131482,0.35506756,746.24114,264.52267)"
+             id="text8664">O-glycan</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8676">
+        <path
+           class="surface"
+           d="m 691.14159,295.27401 45.5708,-97.36299 a 322.5,322.5 0 0 0 -30.75747,-12.5088 l -35.31831,101.5326 a 215,215 0 0 1 20.50498,8.33919 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8670" />
+        <g
+           class="slicetext"
+           id="g8674">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.0804421,-0.19779647,0.19779647,0.0804421,703.90696,242.14945)"
+             id="text8672">Glyco-conjugate degradation</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8684">
+        <path
+           class="surface"
+           d="m 670.63661,286.93482 35.31831,-101.5326 a 322.5,322.5 0 0 0 -31.88062,-9.27998 l -24.69144,104.62592 a 215,215 0 0 1 21.25375,6.18666 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8678" />
+        <g
+           class="slicetext"
+           id="g8682">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.05118248,-0.17583321,0.17583321,0.05118248,677.48234,232.66158)"
+             id="text8680">Glycerophospholipid (GPI anchor)</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8692">
+        <path
+           class="surface"
+           d="M 649.38286,280.74816 674.0743,176.12224 a 322.5,322.5 0 0 0 -32.66583,-5.9528 l -13.80282,106.61019 a 215,215 0 0 1 21.77721,3.96853 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8686" />
+        <g
+           class="slicetext"
+           id="g8690">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.10324901,-0.56657595,0.56657595,0.10324901,657.46474,217.97999)"
+             id="text8688">N-glycan</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8700">
+        <path
+           class="surface"
+           d="m 627.60565,276.77963 13.80282,-106.61019 a 322.5,322.5 0 0 0 -33.10477,-2.56252 l -2.7679,107.46436 a 215,215 0 0 1 22.06985,1.70835 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8694" />
+        <g
+           class="slicetext"
+           id="g8698">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.01433338,-0.18517068,0.18517068,0.01433338,623.23591,222.26949)"
+             id="text8696">SLC nucleotide-sugar transporter</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8708">
+        <path
+           class="surface"
+           d="m 605.5358,275.07128 2.7679,-107.46436 a 322.5,322.5 0 0 0 -33.19279,0.85493 l 8.29637,107.17938 a 215,215 0 0 1 22.12852,-0.56995 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8702" />
+        <g
+           class="slicetext"
+           id="g8706">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.01315877,0.51089216,-0.51089216,0.01315877,586.18548,221.60504)"
+             id="text8704">Deacetylase</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8716">
+        <path
+           class="surface"
+           d="m 583.40728,275.64123 -8.29637,-107.17938 a 322.5,322.5 0 0 0 -32.92895,4.26331 l 19.27268,105.75828 a 215,215 0 0 1 21.95264,-2.84221 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8710" />
+        <g
+           class="slicetext"
+           id="g8714">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.04561169,0.35229539,-0.35229539,0.04561169,560.74243,224.13262)"
+             id="text8712">Acetyltransferase</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8724">
+        <path
+           class="surface"
+           d="M 561.45464,278.48344 542.18196,172.72516 a 322.5,322.5 0 0 0 -32.31608,7.62651 l 30.04471,103.21611 a 215,215 0 0 1 21.54405,-5.08434 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8718" />
+        <g
+           class="slicetext"
+           id="g8722">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.05195029,0.22013087,-0.22013087,0.05195029,535.29997,229.13789)"
+             id="text8720">SLC acetyl-CoA transporter</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8732">
+        <path
+           class="surface"
+           d="M 539.91059,283.56778 509.86588,180.35167 a 322.5,322.5 0 0 0 -31.36063,10.90885 l 40.49825,99.57983 a 215,215 0 0 1 20.90709,-7.27257 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8726" />
+        <g
+           class="slicetext"
+           id="g8730">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.13911447,0.39992441,-0.39992441,0.13911447,506.32518,238.10384)"
+             id="text8728">Decarboxylase</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8740">
+        <path
+           class="surface"
+           d="m 519.0035,290.84035 -40.49825,-99.57983 a 322.5,322.5 0 0 0 -30.07275,14.07557 l 50.5225,94.88797 a 215,215 0 0 1 20.0485,-9.38371 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8734" />
+        <g
+           class="slicetext"
+           id="g8738">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.21418616,0.45761336,-0.45761336,0.21418616,479.93183,249.56222)"
+             id="text8736">Carboxylase</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8748">
+        <path
+           class="surface"
+           d="m 498.955,300.22406 -50.5225,-94.88797 a 322.5,322.5 0 0 0 -28.4661,17.09307 l 60.0112,89.19028 a 215,215 0 0 1 18.9774,-11.39538 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8742" />
+        <g
+           class="slicetext"
+           id="g8746">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.2518975,0.41949968,-0.41949968,0.2518975,456.02787,263.06673)"
+             id="text8744">Phosphatase</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8756">
+        <path
+           class="surface"
+           d="m 479.9776,311.61944 -60.0112,-89.19028 a 322.5,322.5 0 0 0 -26.5577,19.9294 l 68.86377,82.54714 a 215,215 0 0 1 17.70513,-13.28626 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8750" />
+        <g
+           class="slicetext"
+           id="g8754">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.37181644,0.49547868,-0.49547868,0.37181644,421.26809,265.75689)"
+             id="text8752">Kinase</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8764">
+        <path
+           class="surface"
+           d="m 407.68528,393.87483 -96.15736,-48.06258 a 322.5,322.5 0 0 0 -13.29659,30.4252 l 100.58955,37.92085 a 215,215 0 0 1 8.8644,-20.28347 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8758" />
+        <g
+           class="slicetext"
+           id="g8762">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.28316761,0.12375148,-0.12375148,0.28316761,352.10076,386.20931)"
+             id="text8760">Intra-Golgi tansport</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8772">
+        <path
+           class="surface"
+           d="M 398.82088,414.1583 298.23133,376.23745 a 322.5,322.5 0 0 0 -10.09777,31.63111 l 103.95548,27.37715 a 215,215 0 0 1 6.73184,-21.08741 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8766" />
+        <g
+           class="slicetext"
+           id="g8770">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.50902931,0.16250012,-0.16250012,0.50902931,341.07191,414.90447)"
+             id="text8768">Golgi to PM</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8780">
+        <path
+           class="surface"
+           d="M 392.08904,435.24571 288.13356,407.86856 a 322.5,322.5 0 0 0 -6.79191,32.50173 l 106.21945,16.54324 a 215,215 0 0 1 4.52794,-21.66782 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8774" />
+        <g
+           class="slicetext"
+           id="g8778">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.32796527,0.0685351,-0.0685351,0.32796527,336.04448,439.46193)"
+             id="text8776">Exosome/secreted</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8788">
+        <path
+           class="surface"
+           d="M 387.5611,456.91353 281.34165,440.37029 a 322.5,322.5 0 0 0 -3.41404,33.02781 l 107.35746,5.53397 a 215,215 0 0 1 2.27603,-22.01854 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8782" />
+        <g
+           class="slicetext"
+           id="g8786">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.51998324,0.05375008,-0.05375008,0.51998324,332.04071,469.39613)"
+             id="text8784">Endocytosis</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8796">
+        <path
+           class="surface"
+           d="M 385.28507,478.93207 277.92761,473.3981 a 322.5,322.5 0 0 0 0,33.2038 l 107.35746,-5.53397 a 215,215 0 0 1 0,-22.13586 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8790" />
+        <g
+           class="slicetext"
+           id="g8794">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.59506928,0,0,0.59506928,318.29866,498.03344)"
+             id="text8792">Clathrin</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8804">
+        <path
+           class="surface"
+           d="m 385.28507,501.06793 -107.35746,5.53397 a 322.5,322.5 0 0 0 3.41404,33.02781 L 387.5611,523.08647 a 215,215 0 0 1 -2.27603,-22.01854 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8798" />
+        <g
+           class="slicetext"
+           id="g8802">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.32095479,-0.03317673,0.03317673,0.32095479,333.15686,521.95739)"
+             id="text8800">Endocytic recycling</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8812">
+        <path
+           class="surface"
+           d="m 387.5611,523.08647 -106.21945,16.54324 a 322.5,322.5 0 0 0 6.79191,32.50173 l 103.95548,-27.37715 a 215,215 0 0 1 -4.52794,-21.66782 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8806" />
+        <g
+           class="slicetext"
+           id="g8810">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.52970709,-0.11069321,0.11069321,0.52970709,336.42322,552.54312)"
+             id="text8808">Lysosomes</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8820">
+        <path
+           class="surface"
+           d="m 392.08904,544.75429 -103.95548,27.37715 a 322.5,322.5 0 0 0 10.09777,31.63111 L 398.82088,565.8417 a 215,215 0 0 1 -6.73184,-21.08741 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8814" />
+        <g
+           class="slicetext"
+           id="g8818">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.24288149,-0.07753634,0.07753634,0.24288149,345.04575,574.99927)"
+             id="text8816">Golgi to ER (retrograde)</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8828">
+        <path
+           class="surface"
+           d="m 398.82088,565.8417 -100.58955,37.92085 a 322.5,322.5 0 0 0 13.29659,30.4252 l 96.15736,-48.06258 a 215,215 0 0 1 -8.8644,-20.28347 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8822" />
+        <g
+           class="slicetext"
+           id="g8826">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.21909956,-0.09575211,0.09575211,0.21909956,355.04874,600.56865)"
+             id="text8824">ER to Golgi (anterograde)</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8836">
+        <path
+           class="surface"
+           d="m 407.68528,586.12517 -96.15736,48.06258 a 322.5,322.5 0 0 0 16.35446,28.89677 l 90.70587,-57.69484 a 215,215 0 0 1 -10.90297,-19.26451 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8830" />
+        <g
+           class="slicetext"
+           id="g8834">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.56972228,-0.32244096,0.32244096,0.56972228,348.71022,642.37523)"
+             id="text8832">COPI</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8844">
+        <path
+           class="surface"
+           d="m 418.58825,605.38968 -90.70587,57.69484 a 322.5,322.5 0 0 0 19.23898,27.06204 l 84.29288,-66.71552 a 215,215 0 0 1 -12.82599,-18.04136 z"
+           style="opacity:0.7;fill:#ab63fa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8838" />
+        <g
+           class="slicetext"
+           id="g8842">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.51822119,-0.36841454,0.36841454,0.51822119,368.66134,664.99543)"
+             id="text8840">COPII</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8852">
+        <path
+           class="surface"
+           d="m 539.91059,696.43222 -30.04471,103.21611 a 322.5,322.5 0 0 0 32.31608,7.62651 l 19.27268,-105.75828 a 215,215 0 0 1 -21.54405,-5.08434 z"
+           style="opacity:0.7;fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8846" />
+        <g
+           class="slicetext"
+           id="g8850">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.07736344,-0.32781497,0.32781497,0.07736344,542.70573,752.57186)"
+             id="text8848">Retrotranslocation</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8860">
+        <path
+           class="surface"
+           d="m 561.45464,701.51656 -19.27268,105.75828 a 322.5,322.5 0 0 0 32.92895,4.26331 l 8.29637,-107.17938 a 215,215 0 0 1 -21.95264,-2.84221 z"
+           style="opacity:0.7;fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8854" />
+        <g
+           class="slicetext"
+           id="g8858">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.03171848,-0.24498705,0.24498705,0.03171848,568.79909,756.93267)"
+             id="text8856">Proteasomal degradation</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8868">
+        <path
+           class="surface"
+           d="m 583.40728,704.35877 -8.29637,107.17938 a 322.5,322.5 0 0 0 33.19279,0.85493 l -2.7679,-107.46436 a 215,215 0 0 1 -22.12852,-0.56995 z"
+           style="opacity:0.7;fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8862" />
+        <g
+           class="slicetext"
+           id="g8866">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.01144737,-0.44444657,0.44444657,0.01144737,599.082,758.74861)"
+             id="text8864">Ubiquitination</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8876">
+        <path
+           class="surface"
+           d="m 605.5358,704.92872 2.7679,107.46436 a 322.5,322.5 0 0 0 33.10477,-2.56252 L 627.60565,703.22037 a 215,215 0 0 1 -22.06985,1.70835 z"
+           style="opacity:0.7;fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8870" />
+        <g
+           class="slicetext"
+           id="g8874">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.03418137,0.44158362,-0.44158362,0.03418137,614.77441,758.34376)"
+             id="text8872">IRE1 pathway</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8884">
+        <path
+           class="surface"
+           d="m 627.60565,703.22037 13.80282,106.61019 a 322.5,322.5 0 0 0 32.66583,-5.9528 L 649.38286,699.25184 a 215,215 0 0 1 -21.77721,3.96853 z"
+           style="opacity:0.7;fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8878" />
+        <g
+           class="slicetext"
+           id="g8882">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.07800398,0.42804455,-0.42804455,0.07800398,642.39162,755.38577)"
+             id="text8880">ATF6 pathway</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8892">
+        <path
+           class="surface"
+           d="m 649.38286,699.25184 24.69144,104.62592 a 322.5,322.5 0 0 0 31.88062,-9.27998 l -35.31831,-101.5326 a 215,215 0 0 1 -21.25375,6.18666 z"
+           style="opacity:0.7;fill:#ffa15a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8886" />
+        <g
+           class="slicetext"
+           id="g8890">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.11969196,0.41119188,-0.41119188,0.11969196,669.54334,749.59656)"
+             id="text8888">PERK pathway</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8900">
+        <path
+           class="surface"
+           d="M 922.5,490 H 1030 a 430,430 0 0 0 -2.2791,-44.21303 L 920.79071,456.84023 A 322.5,322.5 0 0 1 922.5,490 Z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8894" />
+        <g
+           class="slicetext"
+           id="g8898">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.40489226,-0.02087102,0.02087102,0.40489226,975.99164,476.09929)"
+             id="text8896">Hyaluronic acid</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8908">
+        <path
+           class="surface"
+           d="m 920.79071,456.84023 106.93019,-11.05326 a 430,430 0 0 0 -6.813,-43.74436 l -105.22694,21.98935 a 322.5,322.5 0 0 1 5.10975,32.80827 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8902" />
+        <g
+           class="slicetext"
+           id="g8906">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.40155949,-0.06254122,0.06254122,0.40155949,972.57137,437.52611)"
+             id="text8904">Keratan sulfate</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8916">
+        <path
+           class="surface"
+           d="m 915.68096,424.03196 105.22694,-21.98935 a 430,430 0 0 0 -11.2747,-42.81199 l -102.40829,32.69235 a 322.5,322.5 0 0 1 8.45605,32.10899 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8910" />
+        <g
+           class="slicetext"
+           id="g8914">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.3788056,-0.09976017,0.09976017,0.3788056,965.15366,399.30369)"
+             id="text8912">Heparan sulfate</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8924">
+        <path
+           class="surface"
+           d="m 907.22491,391.92297 102.40829,-32.69235 a 430,430 0 0 0 -15.61693,-41.4258 l -98.50407,43.0488 a 322.5,322.5 0 0 1 11.71271,31.06935 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8918" />
+        <g
+           class="slicetext"
+           id="g8922">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.30609451,-0.11539333,0.11539333,0.30609451,953.5961,361.41879)"
+             id="text8920">Chondroitin sulfate</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8932">
+        <path
+           class="surface"
+           d="m 895.5122,360.85362 98.50407,-43.0488 a 430,430 0 0 0 -19.79362,-39.60049 l -93.55566,52.94892 a 322.5,322.5 0 0 1 14.84521,29.70037 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8926" />
+        <g
+           class="slicetext"
+           id="g8930">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.31976035,-0.15982665,0.15982665,0.31976035,938.6797,326.11208)"
+             id="text8928">Dermatan sulfate</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8940">
+        <path
+           class="surface"
+           d="m 880.66699,331.15325 93.55566,-52.94892 a 430,430 0 0 0 -23.76046,-37.3554 l -87.61555,62.28777 a 322.5,322.5 0 0 1 17.82035,28.01655 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8934" />
+        <g
+           class="slicetext"
+           id="g8938">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.24684568,-0.15700993,0.15700993,0.24684568,919.57204,291.41202)"
+             id="text8936">Lacto/neolacto series</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8948">
+        <path
+           class="surface"
+           d="m 862.84664,303.1367 87.61555,-62.28777 a 430,430 0 0 0 -27.47546,-34.71434 l -80.74668,70.96635 a 322.5,322.5 0 0 1 20.60659,26.03576 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8942" />
+        <g
+           class="slicetext"
+           id="g8946">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.32268398,-0.25539559,0.25539559,0.32268398,898.43551,260.87332)"
+             id="text8944">Isoglobo series</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8956">
+        <path
+           class="surface"
+           d="m 842.24005,277.10094 80.74668,-70.96635 a 430,430 0 0 0 -30.89919,-31.7053 l -73.02189,78.89268 a 322.5,322.5 0 0 1 23.1744,23.77897 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8950" />
+        <g
+           class="slicetext"
+           id="g8954">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.36121764,-0.35203375,0.35203375,0.36121764,874.15894,232.31957)"
+             id="text8952">Globo series</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8964">
+        <path
+           class="surface"
+           d="m 819.06565,253.32197 73.02189,-78.89268 a 430,430 0 0 0 -33.9954,-28.36017 l -64.52303,85.98272 a 322.5,322.5 0 0 1 25.49654,21.27013 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8958" />
+        <g
+           class="slicetext"
+           id="g8962">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.28204751,-0.33809097,0.33809097,0.28204751,845.55088,204.92568)"
+             id="text8960">Ganglio series</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8972">
+        <path
+           class="surface"
+           d="m 793.56911,232.05184 64.52303,-85.98272 A 430,430 0 0 0 821.3609,121.35471 l -55.34022,92.16132 a 322.5,322.5 0 0 1 27.54843,18.53581 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8966" />
+        <g
+           class="slicetext"
+           id="g8970">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.17468339,-0.25961921,0.25961921,0.17468339,813.52625,180.20997)"
+             id="text8968">O-glycan not-mucin</text>
+        </g>
+      </g>
+      <g
+         class="slice"
+         id="g8980">
+        <path
+           class="surface"
+           d="m 766.02068,213.51603 55.34022,-92.16132 a 430,430 0 0 0 -39.07771,-20.80668 l -45.5708,97.36299 a 322.5,322.5 0 0 1 29.30829,15.60501 z"
+           style="opacity:0.7;fill:#00cc96;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:0"
+           id="path8974" />
+        <g
+           class="slicetext"
+           id="g8978">
+          <text
+             data-notex="1"
+             class="slicetext"
+             text-anchor="middle"
+             x="0"
+             y="0"
+             style="font-size:34px;font-family:'Open Sans', verdana, arial, sans-serif;white-space:pre;fill:#444444;fill-opacity:1"
+             transform="matrix(0.18603195,-0.34939272,0.34939272,0.18603195,781.52156,160.43543)"
+             id="text8976">O-glycan mucin</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,207 @@
+---
+title: ""
+output: html_document
+---
+
+characterize possible bias in physiological expression of genes vs secRecon curated metrics (e.g. # annotated process terms, mean relevance score, max relevance score)
+
+```{r}
+library(dplyr)
+library(pheatmap)
+library(dendextend)
+library(tibble)
+library(GSVA)
+library(ggplot2)
+library(readxl)
+```
+
+# read in secRecon and HPA data
+```{r}
+# read in secrecon master table ## available as Supplementary Table S1
+mt <- read_excel('../Secretory Pathway Recon.xlsx')
+```
+
+GTEx TPM expression data obtained from HPA database
+https://www.proteinatlas.org/humanproteome/tissue/data#gtex_tissue_groups_rna
+
+"Transcript expression levels from RNA seq summarized per gene in 35 tissues based on 46 tissue subtypes and in the individual tissue subtypes. The tab-separated files includes Ensembl gene identifier, analysed tissue, transcripts per million ("TPM"), protein-transcripts per million ("pTPM") and normalized expression ("nTPM"). The data was obtained from GTEx and is based on The Human Protein Atlas version 24.0 and Ensembl version 109."
+
+```{r}
+gtex = read.csv('rna_tissue_gtex.tsv',sep='\t')
+gtex
+```
+```{r}
+# 1072 secrecon genes in gtex data
+gtex.sr.genes <- intersect(mt$`HUMAN ENSEMBL`,gtex$Gene)
+length(gtex.sr.genes)
+```
+
+# preprocess GTEx expression data
+pivot gtex expression (nTPM) data by gene (rows) x tissue (cols) and filter for secRecon genes
+```{r}
+length(unique(gtex$Gene)) # 20162
+length(unique(gtex$Gene.name)) # 20151
+length(unique(mt$`HUMAN ENSEMBL`)) # 1122
+
+gtex.sr <- gtex %>% select(c(Gene,Tissue,nTPM)) %>% tidyr::pivot_wider(names_from = Tissue,
+              values_from = c(nTPM))
+gtex.sr <- subset(gtex.sr,Gene %in% mt$`HUMAN ENSEMBL`) %>% as.data.frame()
+rownames(gtex.sr) <- gtex.sr$Gene
+
+# order by master
+gtex.sr <- gtex.sr[gtex.sr.genes,]
+gtex.sr # 1072 genes
+```
+
+37 unique tissue types
+```{r}
+length(unique(gtex$Tissue))
+head(gtex$Tissue)
+```
+
+
+# correlation of secRecon process with avg expression per sample (tissue type)
+
+create named vectors for secRecon metrics per gene: 
+1. max Process confidence score
+2. mean Process confidence score
+3. # annotated secRecon processes
+```{r}
+# get max score per gene
+sec.g.maxscore.ensmb <- as.numeric(mt %>% select(contains("Mean Score")) %>% mutate_all(function(x) as.numeric(as.character(x))) %>% apply(1,max,na.rm=T))
+names(sec.g.maxscore.ensmb) <- mt$`HUMAN ENSEMBL`
+
+sec.g.meanscore.ensmb <- as.numeric(mt %>% select(contains("Mean Score")) %>% mutate_all(function(x) as.numeric(as.character(x))) %>% apply(1,mean,na.rm=T))
+names(sec.g.meanscore.ensmb) <- mt$`HUMAN ENSEMBL`
+
+# get n processes per gene
+sec.g.nprocess.ensmb <- as.numeric(rowSums(!is.na(mt %>% select(contains("Mean Score")))))
+names(sec.g.nprocess.ensmb) <- mt$`HUMAN ENSEMBL`
+```
+
+```{r}
+summary(is.na(sec.g.maxscore.ensmb))
+summary(is.na(sec.g.meanscore.ensmb))
+summary(is.na(sec.g.nprocess.ensmb))
+```
+
+correlate secRecon max process score with expression per tissue type
+```{r}
+# init list to score correlations
+gtex.cor.maxscore <- list()
+
+for (tissue in grep('Gene',colnames(gtex.sr),value = T,invert = T)) {
+  # print(tissue)
+  
+  # create tissue subset data
+  ## log transform TPM, match with secRecon metric
+  tissue.df <- data.frame('log10TPM'=log10(gtex.sr[,tissue]),
+                          'maxScore'=sec.g.maxscore.ensmb[rownames(gtex.sr)])
+  
+  # scatter plot per tissue 
+  p <- ggplot(tissue.df, aes(log10TPM,maxScore)) + geom_point(alpha=0.2) + theme_classic() + scale_y_continuous(breaks=seq(0,4,0.5)) + ggtitle(tissue)
+
+  print(ggExtra::ggMarginal(p,type='histogram'))
+  
+  # spearman correlation of TPM vs secRecon metric
+  gtex.cor.maxscore[[tissue]] = cor.test(gtex.sr[,tissue],as.numeric(sec.g.maxscore.ensmb[rownames(gtex.sr)]),method='spearman')
+}
+
+```
+correlate secRecon mean process score with expression per tissue type
+```{r}
+# init list to score correlations
+gtex.cor.meanscore <- list()
+
+for (tissue in grep('Gene',colnames(gtex.sr),value = T,invert = T)) {
+  # print(tissue)
+  
+  # create tissue subset data
+  ## log transform TPM, match with secRecon metric
+  tissue.df <- data.frame('log10TPM'=log10(gtex.sr[,tissue]),
+                          'meanScore'=sec.g.meanscore.ensmb[rownames(gtex.sr)])
+  
+  # scatter plot per tissue 
+  p <- ggplot(tissue.df, aes(log10TPM,meanScore)) + geom_point(alpha=0.2) + theme_classic() + scale_y_continuous(breaks=seq(0,4,0.5)) + ggtitle(tissue)
+
+  print(ggExtra::ggMarginal(p,type='histogram'))
+  
+  # spearman correlation of TPM vs secRecon metric
+  gtex.cor.meanscore[[tissue]] = cor.test(gtex.sr[,tissue],as.numeric(sec.g.meanscore.ensmb[rownames(gtex.sr)]),method='spearman')
+}
+
+```
+
+correlate number of secRecon annotated processes with expression per tissue type
+```{r}
+# function to count processes per gene
+count.n.process = function(gene,genelist) {
+  i = 0
+  for (n in names(genelist)) {
+  if (gene %in% genelist[[n]]) {
+    # print(n)
+    i = i + 1}}
+  return(i)}
+```
+
+```{r}
+sec.db <- readRDS('../secseq_plasma/data/t2g_table.rds')
+length(sec.db)
+```
+
+
+```{r}
+# convert sec.db to ensemble terms
+sec.db.ensembl <- lapply(sec.db,function(x) {subset(mt,mt$'GENE SYMBOL' %in% x)$"HUMAN ENSEMBL"})
+
+# calc number of annotated process (including parent systems) for all genes 
+sec.g.nprocess.wparents.ensembl <- sapply(mt$"HUMAN ENSEMBL", function(x) {count.n.process(x, sec.db.ensembl)})
+
+head(sec.g.nprocess.wparents.ensembl)
+```
+
+
+```{r}
+# init list to score correlations
+gtex.cor.nprocess <- list()
+
+for (tissue in grep('Gene',colnames(gtex.sr),value = T,invert = T)) {
+  # create tissue subset data
+  ## log transform TPM, match with secRecon metric
+  tissue.df <- data.frame('log10TPM'=log10(gtex.sr[,tissue]),
+                          'NProcesses'=sec.g.nprocess.wparents.ensembl[rownames(gtex.sr)])
+    # scatter plot per tissue 
+  p <- ggplot(tissue.df, aes(log10TPM,NProcesses)) + geom_point(alpha=0.2) + theme_classic() + scale_y_continuous(breaks=seq(0,max(sec.g.nprocess.wparents.ensembl),1)) + ggtitle(tissue)
+  print(ggExtra::ggMarginal(p,type='histogram'))
+  
+  # spearman correlation of TPM vs secRecon metric
+  gtex.cor.nprocess[[tissue]] =cor.test(gtex.sr[,tissue],as.numeric(sec.g.nprocess.wparents.ensembl[rownames(gtex.sr)]),method='spearman') 
+}
+```
+compile all correlations and create heatmap
+```{r}
+gtex.cor <- list()
+gtex.cor[['MaxScore']] <- unlist(lapply(gtex.cor.maxscore,function(x) {x$estimate}))
+gtex.cor[['MeanScore']] <- unlist(lapply(gtex.cor.meanscore,function(x) {x$estimate}))
+gtex.cor[['NProcess']] <- unlist(lapply(gtex.cor.nprocess,function(x) {x$estimate}))
+
+gtex.cor.df <- as.matrix(do.call(bind_rows,gtex.cor))
+colnames(gtex.cor.df) <- stringr::str_remove(names(gtex.cor$MaxScore),".rho")
+rownames(gtex.cor.df) <- names(gtex.cor)
+# gtex.cor.df
+```
+
+```{r fig.height=3, fig.width=8}
+corrplot::corrplot(gtex.cor.df,is.corr = F,
+          method='color', #order='alphabet',
+          addCoef.col='white',number.cex=0.7,
+          tl.col='black',tl.srt = 45,
+          col = colorRampPalette(c("darkred","white","midnightblue"))(100))
+
+```
+
+```{r}
+# save image
+save.image('0_gtex_secrecon_char.RData')
+```
+

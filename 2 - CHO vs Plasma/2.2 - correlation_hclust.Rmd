@@ -1,0 +1,745 @@
+---
+title: "CHOvPlasma_1"
+output: html_document
+---
+
+```{r}
+library(dplyr)
+library(pheatmap)
+library(dendextend)
+library(tibble)
+library(GSVA)
+library(corrplot)
+```
+
+# import data and genesets
+
+```{r}
+# import secRecon, Feizi et al. genesets
+sec.db <- readRDS('../data/t2g_table.rds') # secRecon genesets
+sec.f <- readRDS('../data/feizi_secdb.rds') # Feizi recon genesets (as a reference standard)
+```
+
+raw data obtained from Raab et al. supplementary materials (10.1016/j.ymben.2024.03.007) 1-s2.0-S1096717624000521-mmc2.xlsx
+
+```{r}
+# store multi omics data (normalized raw counts/abundance) in list
+cho.plasma <- list()
+
+# read in transcriptomic data
+cho.plasma[['rna_raw']] <- openxlsx::read.xlsx('../data/1-s2.0-S1096717624000521-mmc2.xlsx', sheet="Transcriptome raw data")
+cho.plasma[['rna_raw']]
+
+# read in proteomic data
+cho.plasma[['pro_raw']] <-
+openxlsx::read.xlsx('./data/1-s2.0-S1096717624000521-mmc2.xlsx', sheet="Proteome raw data")
+cho.plasma[['pro_raw']]
+```
+
+# metadata
+sample Labels / metadata
+```{r}
+# assign column names per cell line
+## transcriptomics
+MPC.t <- c("MPC-11_Rep1", "MPC-11_Rep2", "MPC-11_Rep3")
+P3X.t <- c("P3X63Ag8_Rep1", "P3X63Ag8_Rep2", "P3X63Ag8_Rep3")
+JK.t <- c("JK-6L_Rep1", "JK-6L_Rep2", "JK-6L_Rep3")
+Karpas.t <- c("Karpas-25_Rep1", "Karpas-25_Rep2", "Karpas-25_Rep3")
+CHO_DG44.t <- c("CHO-DG44-mAb1_Rep1", "CHO-DG44-mAb1_Rep2", "CHO-DG44-mAb1_Rep3")
+CHO_K1.t <- c("CHO-K1-mAb2_Rep1", "CHO-K1-mAb2_Rep2", "CHO-K1-mAb2-Rep3")
+
+## proteomics
+MPC.p <- c("log2_MPC11_Rep1_intensity_sum", "log2_MPC-11_Rep2_intensity_sum", "log2_MPC-11_Rep3_intensity_sum")
+P3X.p <- c("log2_P3X_Rep1_intensity_sum", "log2_P3X_Rep2_intensity_sum", "log2_P3X_Rep3_intensity_sum")
+CHO_DG44.p <- c("log2_CHO-DG44-mAb1_Rep1_intensity_sum", "log2_CHO-DG44-mAb1_Rep2_intensity_sum", "log2_CHO-DG44-mAb1_Rep3_intensity_sum")
+CHO_K1.p <- c("log2_CHO-K1-mAb2_Rep1_intensity_sum", "log2_CHO-K1-mAb2_Rep_intensity_sum", "log2_CHO-K1-mAb2_Rep3_intensity_sum")
+```
+
+```{r}
+# compile samplenames to metadata dataframe
+cp.sample.ann <- data.frame(name=c(CHO_DG44.t, CHO_K1.t), cellLine="CHO") %>%
+  rbind(data.frame(name=c(MPC.t, P3X.t), cellLine="plasma_mouse")) %>%
+  rbind(data.frame(name=c(Karpas.t, JK.t), cellLine="plasma_human")) %>%
+  tibble::column_to_rownames(var="name")
+
+cp.sample.ann.prot <- data.frame(name=c(CHO_DG44.p, CHO_K1.p), cellLine="CHO") %>%
+  rbind(data.frame(name=c(MPC.p, P3X.p), cellLine="plasma_mouse")) %>%
+  tibble::column_to_rownames(var="name")
+```
+
+
+
+
+# GSVA
+
+```{r}
+rna.dg <- cho.plasma[['rna_data']]$Hsap_Gene[duplicated(cho.plasma[['rna_data']]$Hsap_Gene)]
+length(rna.dg)
+
+View(subset(cho.plasma[['rna_data']],Hsap_Gene %in% rna.dg))
+```
+
+
+
+prep data for GSVA (rownames::genes, colnames::samples)
+can only have unique human gene symbols
+
+prep transcriptomics data
+```{r}
+# store preprocessed transcriptomic data as 'rna_data' for GSVA input
+
+## aim to set rownames as hu gene symbol but there are duplicated human symbol; keep the gene with highest mean expression across all samples
+summary(duplicated(cho.plasma[['rna_data']]$Hsap_Gene))
+
+## create new df to store the filtered rows; rbind with rest of expression table after
+cp.temp <- data.frame()
+
+cp.dup.hu.mean <- list()
+cp.dup.hu.cv <- list()
+
+# iterate through each hg (gene) and find highest mean across all samples
+for (hg in unique(cho.plasma[['rna_raw']]$Hsap_Gene)) {
+  hg.df <- subset(cho.plasma[['rna_raw']], Hsap_Gene == hg) #%>% select(contains('Rep'))
+  
+  # get rowmeans for counts
+  hg.x = rowMeans(hg.df %>% dplyr::select(contains('Rep')))
+  
+  ## get index for highest mean row via which.max and keep/appendkeep as row
+  cp.temp = rbind(cp.temp,hg.df[which.max(hg.x),])
+  
+  # get cv (scale invariant metric over variance or stdev)
+  hg.cv = Rfast::rowcvs(hg.df %>% dplyr::select(contains('Rep')) %>% as.matrix())
+  
+  ## store these stats
+  cp.dup.hu.mean[[hg]] = hg.x
+  cp.dup.hu.cv[[hg]] = hg.cv
+}
+```
+
+```{r}
+cp.temp
+
+# filter for data only
+cho.plasma[['rna_data']] <- cp.temp
+
+## set rownames as hu gene symbol
+rownames(cho.plasma[['rna_data']]) = cho.plasma[['rna_data']]$Hsap_Gene
+
+
+## filter for expression values data only
+cho.plasma[['rna_data']] <- cho.plasma[['rna_data']] %>% select(contains('Rep'))
+cho.plasma[['rna_data']]
+```
+
+prep proteomics data
+```{r}
+# map mouse <> human gene symbols
+
+summary(duplicated(cho.plasma[['pro_raw']]$Mmus_Genes)) # all unique mm genes
+
+length(setdiff(cho.plasma[['pro_raw']]$Mmus_Genes,cho.plasma$rna_raw$Mmus_Gene)) # all proteomic mm genes in transcriptomic sheet with hsa<>mm already matched
+
+# create dictionary of mm <> hsa
+mh.map <- split(cho.plasma$rna_raw$Hsap_Gene,cho.plasma$rna_raw$Mmus_Gene)
+```
+
+
+```{r}
+# filter proteomic data, keep only unique human mapped genes; for duplicated, keep the max abundant row
+cho.plasma[['pro_data']] <- cho.plasma[['pro_raw']]
+
+## add hsa gene to col using the mapping from transcriptomic sheet
+cho.plasma[['pro_data']]$Hsap_Gene <- sapply(cho.plasma[['pro_data']]$Mmus_Genes,function(x) {mh.map[[x]]})
+
+# create new df to store the filtered rows
+p.temp <- data.frame()
+
+p.dup.hu.mean <- list()
+p.dup.hu.cv <- list()
+
+# iterate through each hg and find highest mean
+for (hg in unique(cho.plasma[['pro_data']]$Hsap_Gene)) {
+  hg.df <- subset(cho.plasma[['pro_data']], Hsap_Gene == hg) #%>% select(contains('Rep'))
+
+  # get rowmeans for data (columns with log2 intensity sum)
+  hg.x = rowMeans(hg.df %>% dplyr::select(contains('log2')))
+
+  ## get index for highest mean row via which.max and keep/appendkeep as row
+  p.temp = rbind(p.temp,hg.df[which.max(hg.x),])
+
+  # get cv (should be scale invariant  metric vs variance or stdev)
+  hg.cv = Rfast::rowcvs(hg.df %>% dplyr::select(contains('log2')) %>% as.matrix())
+
+  ## store these stats
+  p.dup.hu.mean[[hg]] = hg.x
+  p.dup.hu.cv[[hg]] = hg.cv
+}
+```
+
+```{r}
+p.temp
+
+# filter for data only
+cho.plasma[['pro_data']] <- p.temp
+
+## set rownames as hu gene symbol
+rownames(cho.plasma[['pro_data']]) = cho.plasma[['pro_data']]$Hsap_Gene
+
+
+## filter for proteomics counts/abundance data only
+cho.plasma[['pro_data']] <- cho.plasma[['pro_data']] %>% select(contains('log2'))
+cho.plasma[['pro_data']]
+```
+
+how many secRecon genes are in transcriptomics and proteomics data?
+-- 1029/1127 transcriptomics
+-- 605/1127 proteomics
+```{r}
+length(intersect(rownames(cho.plasma$rna_data),unlist(sec.db)))
+length(intersect(rownames(cho.plasma$pro_data),unlist(sec.db)))
+length(intersect(rownames(cho.plasma$rna_data),c(unlist(sec.db),unlist(sec.f))))
+length(intersect(rownames(cho.plasma$pro_data),c(unlist(sec.db),unlist(sec.f))))
+```
+
+
+perform GSVA on secRecon and Feizi recon genesets
+```{r}
+# transcriptomics GSVA
+t1 <- Sys.time()
+cho.plasma.gsva <- gsva(as.matrix(cho.plasma[['rna_data']]),
+                   c(sec.db,sec.f), method = 'ssgsea', kcdf='Poisson', min.sz=3)
+print(Sys.time() - t1)
+```
+
+```{r}
+# proteomics GSVA
+t1 <- Sys.time()
+cho.plasma.gsva.pro <- gsva(as.matrix(cho.plasma[['pro_data']]),
+                   c(sec.db,sec.f), method = 'ssgsea', kcdf='Poisson', min.sz=3)
+print(Sys.time() - t1)
+```
+
+# visualize GSVA score heatmaps
+
+set up secRecon subsystem annotation palette
+```{r}
+# obtain level 1 / major secRecon system for each subsystem
+## sec lev1 pathways
+sec.1 = c('Translocation','Protein conformation','Post-translational modifications','Proteostasis','Vesicle trafficking')
+
+## find parent
+sec.parents = c()
+test = c()
+for (i in names(sec.db)) {
+  if (i %in% sec.1) {
+    sec.parents = append(sec.parents,i)
+    test = append(test,i)} else if (i %in% c('Acetyltransferase','Lipidation')) {sec.parents = append(sec.parents,'Post-translational modifications')
+    test = append(test,i)} else {
+      for (p in sec.1) {
+      if (length(setdiff(sec.db[[i]],sec.db[[p]])) == 0) {
+        sec.parents = append(sec.parents,p)
+        test = append(test,i)}
+    }
+  }
+}
+```
+
+
+```{r}
+sec.meta = as.data.frame(cbind(names(sec.db),sec.parents))
+sec.meta$db = 'secRecon'
+rownames(sec.meta) = sec.meta$V1
+sec.meta = sec.meta[,c('sec.parents','db')]
+sec.meta
+
+# add Feizi db to metadata
+sec.f.df = as.data.frame(cbind(names(sec.f),rep('Feizi',length(names(sec.f)))))
+rownames(sec.f.df) = sec.f.df$V1
+colnames(sec.f.df) = c('sec.parents','db')
+sec.f.df
+
+## rbind with secrecon metainfo
+sec.meta = rbind(sec.meta,sec.f.df)
+sec.meta
+```
+
+
+```{r}
+# assign unique colorpalette to metadata
+sec.meta.colors <- randomcoloR::distinctColorPalette(length(unique(sec.meta$sec.parents)))
+names(sec.meta.colors) <- unique(sec.meta$sec.parents)
+# sec.meta.colors
+
+sec.colmap <- sapply(sec.meta$sec.parents,function(x) {sec.meta.colors[x]})
+names(sec.colmap) <- rownames(sec.meta)
+head(sec.colmap)
+```
+
+```{r}
+# set metadata group colors
+anno.col= list()
+anno.col$db = c(secRecon='cyan4',Feizi='red4')
+anno.col$cellLine = c(CHO='chartreuse4',plasma_human='darkorange3',plasma_mouse='plum')
+```
+
+
+heatmaps for GSVA
+```{r fig.height=5, fig.width=6}
+# transcriptome gsva
+## no scaling
+pheatmap(cho.plasma.gsva,scale = 'none',annotation_row=sec.meta,annotation_col=cp.sample.ann,
+         annotation_colors = anno.col,
+               fontsize_row = 6, show_colnames = T,fontsize=6,method='average')
+
+## scale across samples (row)
+pheatmap(cho.plasma.gsva,scale = 'row',annotation_row=sec.meta,annotation_col=cp.sample.ann,
+         annotation_colors = anno.col,
+               fontsize_row = 6, show_colnames = T,fontsize=6,method='average')
+
+# proteome gsva
+## no scaling
+pheatmap(cho.plasma.gsva.pro,scale = 'none',annotation_row=sec.meta,annotation_col=cp.sample.ann.prot,annotation_colors = anno.col,
+               fontsize_row = 6, show_colnames = T,fontsize=6,method='average')
+
+## scale across samples (rows)
+pheatmap(cho.plasma.gsva.pro,scale = 'row',annotation_row=sec.meta,annotation_col=cp.sample.ann.prot,annotation_colors = anno.col,
+               fontsize_row = 6, show_colnames = T,fontsize=6,method='average')
+
+```
+
+# secRecon gene-level correlation
+```{r}
+# extract secRecon expression/abundance data
+cho.plasma$rna_sec = cho.plasma$rna_data[intersect(rownames(cho.plasma$rna_data),unlist(sec.db)),]
+
+cho.plasma$pro_sec = cho.plasma$pro_data[intersect(rownames(cho.plasma$pro_data),unlist(sec.db)),]
+```
+
+calculate pairwise Spearman correlation between samples for secRecon gene expression
+```{r}
+# spearman correlation
+scc = list()
+scc$rna.gene <- cor(cho.plasma$rna_sec,method='spearman')
+dim(scc$rna.gene)
+scc$pro.gene <- cor(cho.plasma$pro_sec,method='spearman')
+dim(scc$pro.gene)
+```
+
+gene-level pairwise SCC correlation plots
+```{r}
+# adjust corr matrix names for figure visualizations
+rna.col.viz <- c(paste('MPC',c(1,2,3),sep="-"),paste('P3X',c(1,2,3),sep="-"),paste('JK',c(1,2,3),sep="-"),paste('Karpas',c(1,2,3),sep="-"),paste('CHO.DG44',c(1,2,3),sep='-'),paste('CHO.K1',c(1,2,3),sep='-'))
+pro.col.viz <- c(paste('MPC',c(1,2,3),sep="-"),paste('P3X',c(1,2,3),sep="-"),paste('CHO.DG44',c(1,2,3),sep='-'),paste('CHO.K1',c(1,2,3),sep='-'))
+
+# process correlation tables for corrplot visualizations
+scc$rna.gene.viz <- scc$rna.gene
+colnames(scc$rna.gene.viz) <- rna.col.viz
+rownames(scc$rna.gene.viz) <- rna.col.viz
+
+scc$pro.gene.viz <- scc$pro.gene
+colnames(scc$pro.gene.viz) <- pro.col.viz
+rownames(scc$pro.gene.viz) <- pro.col.viz
+```
+
+
+```{r}
+rna.color.anno = c(rep('darkcyan',6),rep('goldenrod3',6),rep('coral2',6))
+pro.color.anno = c(rep('darkcyan',6),rep('coral2',6))
+
+p <- corrplot(scc$rna.gene.viz,
+                   method='square',order='hclust',addrect = 3, addCoef.col = 'white', tl.cex = 0.5,
+                   number.cex=0.6,
+         col = colorRampPalette(c("darkred","white","midnightblue"))(100),
+         tl.col=rna.color.anno,
+         type='lower',tl.srt = 45,col.lim=c(0,1))
+
+print(p)
+```
+
+```{r fig.height=3, fig.width=3.5}
+# no corr labels
+p <- corrplot(scc$rna.gene.viz,
+                   method='color',order='alphabet',addrect = 3,tl.cex = 1.2, tl.offset=1.0,
+         col = colorRampPalette(c("darkred","white","midnightblue"))(100),
+         tl.col=rna.color.anno,
+         type='full',tl.srt = 45,col.lim=c(0,1))
+print(p)
+p <- corrplot(scc$pro.gene.viz,
+                   method='color',order='alphabet',addrect = 3,
+              tl.cex = 1.2, tl.offset=1,
+         col = colorRampPalette(c("darkred","white","midnightblue"))(100),
+         tl.col=pro.color.anno,
+         type='full',tl.srt = 45,col.lim=c(0,1))
+print(p)
+
+# with corr labels
+p <- corrplot(scc$rna.gene.viz,
+                   method='color',order='alphabet',addrect = 3, addCoef.col = 'white', tl.cex = 1.2, tl.offset=1.0,
+                   number.cex=0.7,
+         col = colorRampPalette(c("darkred","white","midnightblue"))(100),
+         tl.col=rna.color.anno,
+         type='full',tl.srt = 45,col.lim=c(0,1))
+print(p)
+p <- corrplot(scc$pro.gene.viz,
+                   method='color',order='alphabet',addrect = 3, addCoef.col = 'white', tl.cex = 1.2, tl.offset=1,
+                   number.cex=0.85,
+         col = colorRampPalette(c("darkred","white","midnightblue"))(100),
+         tl.col=pro.color.anno,
+         type='full',tl.srt = 45,col.lim=c(0,1))
+print(p)
+```
+
+# secRecon gene-level dendrogram correlation
+```{r}
+# calculate and store gene-level cosine distance matrix in list
+## cho v plasma
+## cho vs mouse vs human
+## per cell line
+dist.gene <- list('cho.plasma' = list(),
+                  'cho.mm.hu' = list(),
+                  'cell.line' = list())
+## cho v plasma
+dist.gene$cho.plasma$cho.cos <- as.dist(1-cosine(t(data.frame(cho.plasma$rna_sec) %>% dplyr::select(contains('CHO')))))
+
+dist.gene$cho.plasma$plasma.cos <- as.dist(1-cosine(t(data.frame(cho.plasma$rna_sec) %>% dplyr::select(-contains('CHO')))))
+
+## cho vs mouse vs human
+dist.gene$cho.mm.hu$cho.cos <- as.dist(1-cosine(t(data.frame(cho.plasma$rna_sec) %>% dplyr::select(-contains('CHO')))))
+
+dist.gene$cho.mm.hu$mm.cos <- as.dist(1-cosine(t(data.frame(cho.plasma$rna_sec[,c(MPC.t,P3X.t)]))))
+
+dist.gene$cho.mm.hu$hu.cos <- as.dist(1-cosine(t(data.frame(cho.plasma$rna_sec[,c(JK.t,Karpas.t)]))))
+
+cell.lines <- list('CHO.DG44'=CHO_DG44.t,
+               'CHO.K1'=CHO_K1.t,
+               'MPC'=MPC.t,
+               'P3X'=P3X.t,
+               'JK'=JK.t,
+               'Karpas'=Karpas.t)
+
+for (c in names(cell.lines)) {
+  dist.gene$cell.line[[paste(c,'.cos',sep="")]] <- as.dist(1-cosine(t(data.frame(cho.plasma$rna_sec[,cell.lines[[c]]]))))
+}
+
+```
+
+
+```{r}
+# proteomics
+dist.pro <- list('cho.plasma' = list(),
+                  'cho.mm.hu' = list(),
+                  'cell.line' = list())
+## cho v plasma
+dist.pro$cho.plasma$cho.cos <- as.dist(1-cosine(t(data.frame(cho.plasma$pro_sec) %>% dplyr::select(contains('CHO')))))
+
+dist.pro$cho.plasma$plasma.cos <- as.dist(1-cosine(t(data.frame(cho.plasma$pro_sec) %>% dplyr::select(-contains('CHO')))))
+
+cell.lines.pro <- list('CHO.DG44'=CHO_DG44.p,
+               'CHO.K1'=CHO_K1.p,
+               'MPC'=MPC.p,
+               'P3X'=P3X.p)
+
+for (c in names(cell.lines.pro)) {
+  dist.pro$cell.line[[paste(c,'.cos',sep="")]] <- as.dist(1-cosine(t(data.frame(cho.plasma$pro_sec[,cell.lines.pro[[c]]]))))
+}
+```
+
+
+```{r}
+# hierarchical clustering --> make dendrograms
+## transcriptomics
+hc.gene <- list()
+for (grp in names(dist.gene)) {
+  hc.gene[[grp]] = lapply(dist.gene[[grp]],function(x) {hclust(x, method='average') %>% as.dendrogram()})
+}
+
+## proteomics
+hc.pro <- list()
+for (grp in names(dist.pro)) {
+  hc.pro[[grp]] = lapply(dist.pro[[grp]],function(x) {hclust(x, method='average') %>% as.dendrogram()})
+}
+```
+
+```{r}
+# make dendlist of transcriptomic and proteomics gene-level dendrograms to perform Baker's gamma correlation
+
+## transcriptomics
+dl.gene.cos <- list()
+dl.gene.cos$cho.plasma <- dendlist(
+  'cho'=hc.gene$cho.plasma$cho.cos,
+  'plasma'=hc.gene$cho.plasma$plasma.cos)
+dl.gene.cos$cho.mm.hu <- dendlist(
+  'cho'=hc.gene$cho.mm.hu$cho.cos,
+  'mm'=hc.gene$cho.mm.hu$mm.cos,
+  'hu'=hc.gene$cho.mm.hu$hu.cos)
+dl.gene.cos$cell.line <- dendlist(
+  'cho.dg44'=hc.gene$cell.line$CHO.DG44.cos,
+  'cho.k1'=hc.gene$cell.line$CHO.K1.cos,
+  'mpc'=hc.gene$cell.line$MPC.cos,
+  'p3x'=hc.gene$cell.line$P3X.cos,
+  'jk'=hc.gene$cell.line$JK.cos,
+  'karpas'=hc.gene$cell.line$Karpas.cos)
+
+## proteomics
+dl.pro.cos <- list()
+dl.pro.cos$cho.plasma <- dendlist(
+  'cho'=hc.pro$cho.plasma$cho.cos,
+  'plasma'=hc.pro$cho.plasma$plasma.cos)
+
+dl.pro.cos$cell.line <- dendlist(
+  'cho.dg44'=hc.pro$cell.line$CHO.DG44.cos,
+  'cho.k1'=hc.pro$cell.line$CHO.K1.cos,
+  'mpc'=hc.pro$cell.line$MPC.cos,
+  'p3x'=hc.pro$cell.line$P3X.cos)
+```
+
+heatmap of gene-cosine-hierarchical-cluster dendrogram correlations focusing on interspecies comparison
+```{r}
+# correlation between species
+colnames(df.gene.corr.cos$cho.mm.hu) <- c('CHO','murine','human')
+rownames(df.gene.corr.cos$cho.mm.hu) <- c('CHO','murine','human')
+
+colnames(df.pro.corr.cos$cho.plasma) <- c('CHO','murine')
+rownames(df.pro.corr.cos$cho.plasma) <- c('CHO','murine')
+
+p <- corrplot(df.gene.corr.cos$cho.mm.hu,
+                   method='color',order='original',addrect = 3, addCoef.col = 'white', tl.cex = 1.2,
+                   number.cex=1.3,
+         col = colorRampPalette(c("darkred","white","midnightblue"))(100),cl.pos = 'n',
+         tl.col=c('darkcyan','coral2','goldenrod'),
+         type='lower',tl.srt = 45,col.lim=c(0,1))
+print(p)
+
+p <- corrplot(df.pro.corr.cos$cho.plasma,
+                   method='color',order='original',addrect = 3, addCoef.col = 'white', tl.cex = 1.2,
+                   number.cex=1.5,
+         col = colorRampPalette(c("darkred","white","midnightblue"))(100),cl.pos = 'n',
+         tl.col=c('darkcyan','coral2'),
+         type='lower',tl.srt = 45,col.lim=c(0,1))
+print(p)
+
+```
+
+# secRecon GSVA- or pathway-level correlation
+
+sample-level pairwise spearman correlation
+```{r}
+scc$rna.gsva <- cor(cho.plasma.gsva,method='spearman')
+scc$pro.gsva <- cor(cho.plasma.gsva.pro,method='spearman')
+```
+
+```{r}
+# format correlation tables for visualization
+scc$rna.gsva.viz <- scc$rna.gsva
+colnames(scc$rna.gsva.viz) <- rna.col.viz
+rownames(scc$rna.gsva.viz) <- rna.col.viz
+
+scc$pro.gsva.viz <- scc$pro.gsva
+colnames(scc$pro.gsva.viz) <- pro.col.viz
+rownames(scc$pro.gsva.viz) <- pro.col.viz
+```
+
+generate spearman correlation corrplots
+```{r fig.height=3, fig.width=3.5}
+# no scc corr label
+p <- corrplot(scc$rna.gsva.viz,
+                   method='color',order='alphabet',addrect = 3, tl.cex = 1.2, tl.offset=1.0,
+         col = colorRampPalette(c("darkred","white","midnightblue"))(100),
+         tl.col=rna.color.anno,
+         type='full',tl.srt = 45,col.lim=c(0,1))
+print(p)
+
+p <- corrplot(scc$pro.gsva.viz,
+                   method='color',order='alphabet',addrect = 3, tl.cex = 1.2, tl.offset=1.0,
+         col = colorRampPalette(c("darkred","white","midnightblue"))(100),
+         tl.col=pro.color.anno,
+         type='full',tl.srt = 45,col.lim=c(0,1))
+print(p)
+
+# with scc corr label
+
+p <- corrplot(scc$rna.gsva.viz,
+                   method='color',order='alphabet',addrect = 3, addCoef.col = 'white', tl.cex = 1.2, tl.offset=1.0,
+                   number.cex=0.65,
+         col = colorRampPalette(c("darkred","white","midnightblue"))(100),
+         tl.col=rna.color.anno,
+         type='full',tl.srt = 45,col.lim=c(0,1))
+print(p)
+
+p <- corrplot(scc$pro.gsva.viz,
+                   method='color',order='alphabet',addrect = 3, addCoef.col = 'white', tl.cex = 1.2, tl.offset=1.0,
+                   number.cex=0.85,
+         col = colorRampPalette(c("darkred","white","midnightblue"))(100),
+         tl.col=pro.color.anno,
+         type='full',tl.srt = 45,col.lim=c(0,1))
+print(p)
+```
+# secRecon GSVA- or pathway-level dendrogram correlation
+```{r}
+# calculate gsva distance - transcriptomics 
+## calculate distance for cho and plasma; interspecies (cho.plasma) and for each cell line
+
+# store distance matrix in list
+## cho v plasma
+## cho vs mouse vs human
+## per cell line
+dist.gsva <- list('cho.plasma' = list(),
+                  'cho.mm.hu' = list(),
+                  'cell.line' = list())
+## cho v plasma
+dist.gsva$cho.plasma$cho.cos <- as.dist(1-cosine(t(data.frame(cho.plasma.gsva) %>% dplyr::select(contains('CHO')))))
+
+dist.gsva$cho.plasma$plasma.cos <- as.dist(1-cosine(t(data.frame(cho.plasma.gsva) %>% dplyr::select(-contains('CHO')))))
+
+## cho vs mouse vs human
+dist.gsva$cho.mm.hu$cho.cos <- as.dist(1-cosine(t(data.frame(cho.plasma.gsva) %>% dplyr::select(-contains('CHO')))))
+
+dist.gsva$cho.mm.hu$mm.cos <- as.dist(1-cosine(t(data.frame(cho.plasma.gsva[,c(MPC.t,P3X.t)]))))
+
+dist.gsva$cho.mm.hu$hu.cos <- as.dist(1-cosine(t(data.frame(cho.plasma.gsva[,c(JK.t,Karpas.t)]))))
+
+## cell line
+for (c in names(cell.lines)) {
+  dist.gsva$cell.line[[paste(c,'.cos',sep="")]] <- as.dist(1-cosine(t(data.frame(cho.plasma.gsva[,cell.lines[[c]]]))))
+}
+```
+
+```{r}
+# calculate gsva distance - proteomics 
+## calculate distance for cho and murine (cho.plasma) and for each cell line
+dist.gsva.pro <- list('cho.plasma' = list(),
+                  'cell.line' = list())
+## cho v murine (cho vs plasma)
+dist.gsva.pro$cho.plasma$cho.cos <- as.dist(1-cosine(t(data.frame(cho.plasma.gsva.pro) %>% dplyr::select(contains('CHO')))))
+
+dist.gsva.pro$cho.plasma$plasma.cos <- as.dist(1-cosine(t(data.frame(cho.plasma.gsva.pro) %>% dplyr::select(-contains('CHO')))))
+
+## cell line
+for (c in names(cell.lines.pro)) {
+  dist.gsva.pro$cell.line[[paste(c,'.cos',sep="")]] <- as.dist(1-cosine(t(data.frame(cho.plasma.gsva.pro[,cell.lines.pro[[c]]]))))
+}
+```
+
+
+```{r}
+# hierarchical clustering with average linkage
+hc.gsva <- list()
+for (grp in names(dist.gsva)) {
+  hc.gsva[[grp]] = lapply(dist.gsva[[grp]],function(x) {hclust(x, method='average') %>% as.dendrogram()})
+}
+
+hc.gsva.pro <- list()
+for (grp in names(dist.gsva.pro)) {
+  hc.gsva.pro[[grp]] = lapply(dist.gsva.pro[[grp]],function(x) {hclust(x, method='average') %>% as.dendrogram()})
+}
+```
+
+```{r}
+# make dendlist to perform correlation
+
+# store list of transcriptome gsva dendrograms
+dl.gsva.cos <- list()
+dl.gsva.cos$cho.plasma <- dendlist(
+  'cho'=hc.gsva$cho.plasma$cho.cos,
+  'plasma'=hc.gsva$cho.plasma$plasma.cos)
+dl.gsva.cos$cho.mm.hu <- dendlist(
+  'cho'=hc.gsva$cho.mm.hu$cho.cos,
+  'mm'=hc.gsva$cho.mm.hu$mm.cos,
+  'hu'=hc.gsva$cho.mm.hu$hu.cos)
+dl.gsva.cos$cell.line <- dendlist(
+  'cho.dg44'=hc.gsva$cell.line$CHO.DG44.cos,
+  'cho.k1'=hc.gsva$cell.line$CHO.K1.cos,
+  'mpc'=hc.gsva$cell.line$MPC.cos,
+  'p3x'=hc.gsva$cell.line$P3X.cos,
+  'jk'=hc.gsva$cell.line$JK.cos,
+  'karpas'=hc.gsva$cell.line$Karpas.cos)
+
+# store list of proteome gsva dendrograms
+dl.gsva.pro.cos <- list()
+dl.gsva.pro.cos$cho.plasma <- dendlist(
+  'cho'=hc.gsva.pro$cho.plasma$cho.cos,
+  'plasma'=hc.gsva.pro$cho.plasma$plasma.cos)
+dl.gsva.pro.cos$cell.line <- dendlist(
+  'cho.dg44'=hc.gsva.pro$cell.line$CHO.DG44.cos,
+  'cho.k1'=hc.gsva.pro$cell.line$CHO.K1.cos,
+  'mpc'=hc.gsva.pro$cell.line$MPC.cos,
+  'p3x'=hc.gsva.pro$cell.line$P3X.cos)
+```
+
+```{r}
+# calculate Baker's gamma index
+df.gsva.corr.cos <- lapply(dl.gsva.cos,function(x) {cor.dendlist(x,method='baker')})
+
+df.gsva.corr.pro.cos <- lapply(dl.gsva.pro.cos,function(x) {cor.dendlist(x,method='baker')})
+```
+
+```{r}
+colnames(df.gsva.corr.cos$cho.mm.hu) <- c('CHO','murine','human')
+rownames(df.gsva.corr.cos$cho.mm.hu) <- c('CHO','murine','human')
+
+colnames(df.gsva.corr.pro.cos$cho.plasma) <- c('CHO','murine')
+rownames(df.gsva.corr.pro.cos$cho.plasma) <- c('CHO','murine')
+```
+generate visualizations of GSVA dendrogram correlation, focusing on interspecies correlations
+```{r}
+p <- corrplot(df.gsva.corr.cos$cho.mm.hu,
+                   method='color',order='original',addrect = 3, addCoef.col = 'white', tl.cex = 1.2,
+                   number.cex=1.2,
+         col = colorRampPalette(c("darkred","white","midnightblue"))(100),cl.pos = 'n',
+         tl.col=c('darkcyan','coral2','goldenrod'),
+         type='lower',tl.srt = 45,col.lim=c(0,1))
+print(p)
+
+p <- corrplot(df.gsva.corr.pro.cos$cho.plasma,
+                   method='color',order='original',addrect = 3, addCoef.col = 'white', tl.cex = 1.2,
+                   number.cex=1.5,
+         col = colorRampPalette(c("darkred","white","midnightblue"))(100),cl.pos = 'n',
+         tl.col=c('darkcyan','coral2'),
+         type='lower',tl.srt = 45,col.lim=c(0,1))
+print(p)
+
+```
+# save rdata
+```{r}
+# save.image("../data/1_correlation_hclust.RData")
+# load(".,/data/1_correlation_hclust.RData")
+```
+
+# Bakers gamma pvalue
+
+to calculate p-value for dendrogram correlation, use Monte Carlo permutation tests of randomly mixed/labeled dendrograms
+10.1016/j.xcrm.2023.101034
+```{r}
+# input a dendlist of 2 dendrograms to compare
+get_pval <- function(dendlist,the_cor,R=1000){
+    set.seed(42) # set random seed
+    
+    # calculate bakers gamma
+    cbg <- cor_bakers_gamma(dendlist)
+    print(cbg)
+    cor_bakers_gamma_results <- numeric(R)
+    
+    d1 <- dendlist[[1]]
+    d2 <- dendlist[[2]]
+    
+    # generate randomized dendrogram leaves
+    for(i in 1:R) {
+       dend_mixed <- sample.dendrogram(d2, replace = FALSE)
+       cor_bakers_gamma_results[i] <- cor_bakers_gamma(d1, dend_mixed)
+    }
+    
+    # if(sum(the_cor < cor_bakers_gamma_results)==0){return("ALL BELOW")}
+    # current cor < random cor is all false --> so the_cor is greater than every random cor
+    
+    # calculate p-value
+    pval <- sum(cbg < cor_bakers_gamma_results)/ R
+    return(pval)
+}
+```
+example
+```{r}
+dl.compare <- list()
+dl.compare$gene.pro <- dl.pro.cos$cho.plasma
+dl.compare$gsva.pro <- dl.gsva.pro.cos$cho.plasma
+dl.pv <- lapply(dl.compare,function(x) {get_pval(x)})
+```

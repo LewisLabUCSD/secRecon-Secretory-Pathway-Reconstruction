@@ -1,0 +1,12 @@
+pandas
+mygene
+openpyxl
+networkx
+matplotlib
+itertools
+scipy
+scanpy
+hvplot
+bbknn==1.5
+anndata
+leidenalg

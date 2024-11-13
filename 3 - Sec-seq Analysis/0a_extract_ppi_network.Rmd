@@ -1,0 +1,68 @@
+---
+title: "Untitled"
+output: 
+---
+
+Extract PPI network edgelist from NDEx database for 2 gold-standard PPI databases - PCNet and STRINGdb
+
+Load libraries
+```{r}
+library(ndexr)
+library(igraph)
+library(dplyr)
+# library(RColorBrewer)
+library(visNetwork)
+```
+
+Function to download networks from NDEx
+```{r}
+ndexcon = ndex_connect(username = "jtat", password = "***")
+
+NDEx_network <- function(UUID, netName,pathsave) {
+  net <- ndex_get_network(ndexcon, UUID) #download network from NDEx as RCX object
+  ## remove NDEx artefacts from network
+  net_rcx <- rcx_asNewNetwork(net)
+  net_graph <- rcx_toRCXgraph(net_rcx, idAsVertexName = FALSE, idAsEdgeName = TRUE, verbose = FALSE)
+  saveRDS(net_graph, paste(pathsave, netName, ".RDS", sep="")) #be sure to specify your own output folder
+}
+```
+
+Download networks and save 
+```{r}
+# Download PCNet V1.3
+NDEx_network(UUID="4de852d9-9908-11e9-bcaf-0ac135e8bacf", netName="PCNet",pathsave='../data/ppi_db/networks/')
+
+# Download STRING network
+# high confidence (score >= 0.7)
+NDEx_network(UUID="275bd84e-3d18-11e8-a935-0ac135e8bacf", netName="STRING",pathsave='../data/ppi_db/networks/')
+```
+```{r}
+network.path = '../data/ppi_db/networks/'
+```
+
+
+```{r}
+PCNet <- readRDS(paste(network.path,"PCNet.RDS",sep=""))
+STRING <- readRDS(paste(network.path,"STRING.RDS",sep=""))
+```
+
+```{r}
+# convert to edgelist
+pcn.edgelist <- as_edgelist(PCNet)
+head(pcn.edgelist)
+
+st.edgelist <- as_edgelist(STRING)
+head(st.edgelist)
+```
+
+```{r}
+dim(pcn.edgelist)
+dim(st.edgelist)
+```
+
+export edgelist as dataframe
+```{r}
+write.csv(as.data.frame(pcn.edgelist),paste(network.path,'PCNet_edgelist.csv',sep=''))
+write.csv(as.data.frame(st.edgelist),paste(network.path,'STRINGdb_edgelist.csv',sep=''))
+```
+

@@ -1,0 +1,102 @@
+---
+title: "secseq igg"
+output: html_document
+---
+
+```{r}
+library(dplyr)
+library(pheatmap)
+library(dendextend)
+library(tibble)
+```
+
+# read in data
+
+data is normalized mean expression of secRecon genes annotated in the subsystems important in explaining heterogeneity of secreted IgG; 
+
+mean expression has been calculated within random subsampled pseudobulk groups within each IgG cluster (Leiden clusters 0,1,2,4,10); refer to 2_Dominance-Analysis.ipynb
+
+genes that are 0 across all groups have been removed
+```{r}
+# load in saved image
+load("4_IgGpopulation_corr.RData")
+```
+
+
+```{r}
+data = read.csv('../data/dominance_analysis/igg_cluster_pseudobulk_secrecon_mean.csv',row.names = 1)
+dim(data)
+data
+```
+
+# spearman corr for secRecon gene expression across all groups
+```{r fig.height=3, fig.width=3}
+corrplot::corrplot(cor.gene,
+                   method='square',order='original',addrect = 3,tl.pos = 'n',addgrid.col=NA,addCoef.col = NULL,cl.cex=1.2)
+```
+
+
+Dendrogram creation from hierarchical clustering of gene expression and Baker's gamma index correlation of dendrograms
+
+# create dendrograms per cluster
+```{r}
+# separate data per cluster
+data.cluster <- list()
+clusters <- sapply(colnames(data), function(x) {strsplit(x,'[_]')[[1]][1]})
+# clusters
+
+for (c in unique(clusters)){
+  data.cluster[[c]] <- data[,names(clusters[clusters == c])]
+}
+
+lapply(data.cluster,dim)
+
+```
+
+
+```{r}
+# calculate similarity distance between genes using cosine distance
+dist.cluster <- lapply(data.cluster,function(x) {
+  as.dist(1-cosine(t(data.frame(x))))}) 
+
+# perform hierarchical clustering using average linkage
+## convert to dendrogram
+hc.cluster <- lapply(dist.cluster,function(x) {hclust(x, method='average') %>% as.dendrogram()})
+```
+
+
+```{r}
+dend.cluster <- dendlist('X0'=hc.cluster$X0, 
+                 'X1'=hc.cluster$X1, 
+                 'X2'=hc.cluster$X2, 
+                 'X4'=hc.cluster$X4, 
+                 'X10'=hc.cluster$X10)
+```
+
+```{r}
+# correlate with bakers gamma
+dend.cluster.cor = cor.dendlist(dend.cluster, method = 'baker')
+```
+
+```{r}
+# rename/reorder cluster names
+c.order <- c(10,4,2,1,0)
+dend.cluster.cor.rn <- dend.cluster.cor
+colnames(dend.cluster.cor.rn) <- stringr::str_replace(colnames(dend.cluster.cor.rn),'X','cluster ')
+rownames(dend.cluster.cor.rn) <- stringr::str_replace(rownames(dend.cluster.cor.rn),'X','cluster ')
+dend.cluster.cor.rn <- dend.cluster.cor.rn[paste('cluster',c.order),paste('cluster',c.order)]
+dend.cluster.cor.rn
+```
+
+summarize Bakers gamma dendrogram correlation using corrplot
+ 
+```{r fig.height=3, fig.width=3}
+corrplot::corrplot(dend.cluster.cor.rn,method='square',order='original',addCoef.col = 'white',type = 'lower',number.cex=1.5,tl.col='black',tl.srt = 45,tl.cex=1.5,cl.pos='n')
+```
+
+
+```{r}
+corrplot::corrplot(dend.cluster.cor,
+                   method='square',order='hclust',addrect = 2,hclust.method='average', addCoef.col = 'black')
+
+```

@@ -1,0 +1,399 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+pairwise differential GSVA score testing (using limma) of secRecon geneset activity for transcriptome and proteome plasma vs CHO data
+
+refer to 1_correlation_hclust.Rmd for generation of GSVA scores
+```{r}
+library(limma)
+library(tidyr)
+library(dplyr)
+library(EnhancedVolcano)
+```
+```{r}
+# load in GSVA and data image from previous notebook
+load(".,/data/1_correlation_hclust.RData")
+```
+
+
+how to interpret GSVA scores and compare
+https://support.bioconductor.org/p/119709/
+
+vignette tutorial to apply LIMMA to find differential pathway activity
+https://www.bioconductor.org/packages/release/bioc/vignettes/GSVA/inst/doc/GSVA.html#62_Differential_expression_at_pathway_level
+
+
+```{r}
+# define sample groups/labels
+rna.groups <- list()
+rna.groups$cho <- c(CHO_DG44.t,CHO_K1.t)
+rna.groups$mm <- c(MPC.t,P3X.t)
+rna.groups$hu <- c(JK.t,Karpas.t)
+rna.groups$plasma = c(rna.groups$mm,rna.groups$hu)
+
+prot.groups <- list()
+prot.groups$cho <- c(CHO_DG44.p,CHO_K1.p)
+prot.groups$mm <- c(MPC.p,P3X.p)
+```
+
+```{r}
+# generate model (comparison: mus plasma vs CHO)
+mod.meta.factor <- as.factor(c(rep('mm',6),rep('cho',6)))
+mod <- model.matrix(~ factor(mod.meta.factor))
+mod
+colnames(mod) <- c("int", "MMvsCHO")
+mod
+```
+
+fit limma models
+```{r}
+gsva.limma.fit <- list()
+gsva.limma.fit$rna <- eBayes(lmFit(cho.plasma.gsva[,c(rna.groups$mm,rna.groups$cho)], mod))
+gsva.limma.fit$pro <- eBayes(lmFit(cho.plasma.gsva.pro, mod))
+
+gsva.limma.res <- lapply(gsva.limma.fit,function(x) decideTests(x, p.value=0.05))
+
+lapply(gsva.limma.res,summary)
+
+```
+
+refer to GSVA vignette on interpretation of logFC as difference in activity, where the magnitude difference and stringency should not be directly interpreted like expression fold-change
+https://www.bioconductor.org/packages/release/bioc/vignettes/GSVA/inst/doc/GSVA.html#62_Differential_expression_at_pathway_level
+
+```{r}
+# extract limma results (toptable) for transcriptomics and proteomics GSVA; separate into up and downregulated using adjusted p-value significance (0.05)
+gsva.limma.tt <- lapply(gsva.limma.fit,function(x) {topTable(x,coef=2,number=length(sec.db))})
+
+gsva.limma.tt$rna.up <- subset(gsva.limma.tt$rna,logFC > 0 & adj.P.Val<0.05)
+gsva.limma.tt$rna.down <- subset(gsva.limma.tt$rna,logFC < 0 & adj.P.Val<0.05)
+gsva.limma.tt$pro.up <- subset(gsva.limma.tt$pro,logFC > 0 & adj.P.Val<0.05)
+gsva.limma.tt$pro.down <- subset(gsva.limma.tt$pro,logFC < 0 & adj.P.Val<0.05)
+```
+
+```{r}
+# overall significant differences in secRecon subprocess activity
+gsva.limma.sig <- list()
+gsva.limma.sig$rna <- subset(gsva.limma.tt$rna, adj.P.Val<0.05)
+gsva.limma.sig$pro <- subset(gsva.limma.tt$pro, adj.P.Val<0.05)
+```
+
+identify differential process at both RNA and protein level
+```{r}
+intersect(rownames(gsva.limma.tt$rna.up),rownames(gsva.limma.tt$pro.up))
+intersect(rownames(gsva.limma.tt$rna.down),rownames(gsva.limma.tt$pro.down))
+```
+
+# visualize differential GSVA pathways
+generated volcano plots
+```{r}
+# define secRecon processes differential at rna and protein level
+sr.process.ev <- c('ERpQC', 'Vesicle budding', 'PERK pathway', 'Co-translational translocation', 'N-glycan','Hydroxylysine')
+```
+
+```{r}
+# assign unique colorpalette to metadata
+## sec.meta object defined in previous notebook
+
+# define a named vector of process of interest : color
+sec.meta.colors.pg <- c('blue3','orange','green','darkkhaki','skyblue')
+
+names(sec.meta.colors.pg) = grep('f_',unique(sec.meta$sec.parents),invert = T,value = T)
+sec.meta.colors.pg
+
+```
+
+RNA GSVA volcano plot
+```{r}
+# create color legend
+ev.df <- gsva.limma.tt$rna
+
+# remove feizi rows
+ev.df <- ev.df[!grepl('f_',rownames(ev.df)),]
+
+ev.df.col <- c()
+for (i in rownames(ev.df)) {
+  if (ev.df[i,'adj.P.Val'] > 0.05) {
+    ev.df.col <- append(ev.df.col,'grey')
+  } else {
+    i.p <- sec.meta[i,'sec.parents']
+    ev.df.col <- append(ev.df.col,sec.meta.colors.pg[[i.p]])
+}}
+names(ev.df.col) <- rownames(ev.df)
+```
+
+
+```{r fig.height=4, fig.width=5}
+EnhancedVolcano(ev.df,
+    lab = rownames(ev.df),
+    colCustom = ev.df.col,
+    selectLab = sr.process.ev,
+    boxedLabels = TRUE,
+    drawConnectors = T, widthConnectors = 1.0,
+    # lengthConnectors=unit(0.05, "npc"),
+    # min.segment.length=0,
+    arrowheads = F,
+    FCcutoff = 0,
+    # min.segment.length=1,
+    colConnectors = 'black',
+    xlab='GSVA score enrichment difference',
+    ylab='-log10 (adj.p-value)',
+    x = 'logFC',
+    y = 'adj.P.Val',
+    xlim=c(min(ev.df$logFC),max(ev.df$logFC)),
+    ylim=c(0,-log10(min(ev.df$adj.P.Val))),
+    pCutoff=0.05,
+    shadeAlpha = 1,
+    pointSize=8,
+    ) + theme(legend.position="none") #+ scale_color_manual(values=sec.meta.colors.pg) + guides(color = guide_legend(title='System')) + theme(legend.position = 'right')
+
+## uncomment above lines to create a manual legend for fianl figures
+```
+
+PROTEIN GSVA volcano plot
+```{r}
+# create color legend
+ev.df <- gsva.limma.tt$pro
+
+# remove feizi rows
+ev.df <- ev.df[!grepl('f_',rownames(ev.df)),]
+
+ev.df.col <- c()
+for (i in rownames(ev.df)) {
+  if (ev.df[i,'adj.P.Val'] > 0.05) {
+    ev.df.col <- append(ev.df.col,'grey')
+  } else {
+    i.p <- sec.meta[i,'sec.parents']
+    ev.df.col <- append(ev.df.col,sec.meta.colors.pg[[i.p]])
+}}
+names(ev.df.col) <- rownames(ev.df)
+```
+
+
+```{r fig.height=4, fig.width=5}
+EnhancedVolcano(ev.df,
+    lab = rownames(ev.df),
+    colCustom = ev.df.col,
+    selectLab = sr.process.ev,
+    boxedLabels = TRUE,
+    drawConnectors = T, widthConnectors = 1.0,
+    # lengthConnectors=unit(0.05, "npc"),
+    # min.segment.length=0,
+    arrowheads = F,
+    FCcutoff = 0,
+    # min.segment.length=1,
+    colConnectors = 'black',
+    xlab='GSVA score enrichment difference',
+    ylab='-log10 (adj.p-value)',
+    x = 'logFC',
+    y = 'adj.P.Val',
+    xlim=c(min(ev.df$logFC),max(ev.df$logFC)),
+    ylim=c(0,-log10(min(ev.df$adj.P.Val))),
+    pCutoff=0.05,
+    shadeAlpha = 1,
+    pointSize=8,
+    ) + theme(legend.position="none") #+ scale_color_manual(values=sec.meta.colors.pg) + guides(color = guide_legend(title='System')) + theme(legend.position = 'right')
+
+## uncomment above lines to create a manual legend for fianl figures
+```
+
+dotplot version of significant differential GSVA scores
+```{r}
+dotplot.limma <- lapply(gsva.limma.sig,function(x) {
+  # remove Feizi genesets
+  x.plot <- x[!grepl('f_',rownames(x)),]
+  
+  # x.plot <- x.plot %>% arrange(logFC)
+  x.plot$log10padj <- -log10(x.plot$adj.P.Val)
+  x.plot <- x.plot %>% arrange(log10padj)
+  
+  x.plot$term <- rownames(x.plot)
+
+  level.order <- arrange(x.plot, logFC)
+  # level.order <- arrange(x.plot, log10padj)
+  # level.order$term <- rownames(level.order)
+  
+  x.plot <- mutate(x.plot,process=factor(term, levels=unique(level.order$term)))
+  
+  return(x.plot)})
+#   if (is.null(x$sigRes)) {x.plot <- x %>% arrange(log2FC)} else {x.plot <- x$sigRes %>% arrange(log2FC)}
+#   
+#   level.order <- arrange(x.plot, log2FC)
+#   x.plot <- mutate(x.plot,process=factor(process, levels=unique(level.order$process)))
+# })
+```
+
+
+```{r fig.height=3, fig.width=4}  
+for (i in names(dotplot.limma)) {
+  p1 <- ggplot(dotplot.limma[[i]], aes(logFC, process)) +
+    geom_point(aes(size=log10padj,color=process), alpha=0.7,show.legend = F) +
+    scale_color_manual(values=sec.colmap) +
+    theme(text=element_text(size=8), axis.title.y=element_blank()) +
+    ggtitle(paste(i,'GSVA adj.pval<0.05')) +
+    geom_vline(xintercept = 0, linetype="dotted", color = "red", size=1) #+ scale_colour_gradient(low = "indianred3", high = "orchid4")
+  print(p1)}
+
+# scale_color_manual(values=col)
+```
+
+# identify engineering targets in enriched differential processes
+```{r}
+# what are the FC expr for O-glycan mucin genes
+data.rna = readxl::read_excel('../data/secrecon_1-s2.0-S1096717624000521-mmc3.xlsx',sheet='Transcriptome DE')
+data.prot = readxl::read_excel('./data/secrecon_1-s2.0-S1096717624000521-mmc3.xlsx',sheet='Proteome DE proteins')
+```
+
+```{r}
+# get named and ranked vector of l2FC
+fc.rna <- data.rna$`Fold-Change CHO/Murine`
+names(fc.rna) <- toupper(data.rna$Mmus_Genes)
+
+fc.prot <- log2(data.prot$`FC PCD/CHO`)
+names(fc.prot) <- toupper(data.prot$Mmus_Genes)
+
+## convert CHO/murine FC to l2FC and invert to murine/CHO
+
+## convert FC to l2FC
+### -FC was calculated as -1/FC according to methods --> convert it back to just FC
+l2fc.rna <- sapply(fc.rna,function(x) {
+  # adjust negative FC to cho/murine FC
+  if (x < 0) {x.adj <- -1/x} else {x.adj <- x}
+  
+  # invert FC to murine/CHO FC
+  # x.fc <- x.adj^-1 
+  return(log2(x.adj))
+})
+l2fc.rna <- l2fc.rna[order(l2fc.rna)]
+
+l2fc.prot <- fc.prot[order(fc.prot)]
+
+# head(fc.rna)
+head(l2fc.rna)
+head(l2fc.prot)
+```
+
+```{r}
+l2fc.rna.sec <- l2fc.rna[intersect(names(l2fc.rna),unlist(sec.db))]
+l2fc.pro.sec <- l2fc.prot[intersect(names(l2fc.prot),unlist(sec.db))]
+
+length(l2fc.rna.sec)
+length(l2fc.pro.sec)
+
+l2fc.rp.sec.g <- intersect(names(l2fc.rna.sec),names(l2fc.pro.sec))
+
+l2fc.rp.sec <- data.frame(cbind(l2fc.rna.sec[l2fc.rp.sec.g],l2fc.pro.sec[l2fc.rp.sec.g]))
+colnames(l2fc.rp.sec) <- c('rna.log2FC','pro.log2FC')
+ggscatter(l2fc.rp.sec,x='rna.log2FC',y='pro.log2FC') + stat_cor(method='spearman',label.y.npc='top',size=3) + font('xy.text',size=8) + ggtitle(paste(length(l2fc.rp.sec.g),'secRecon genes'))
+```
+
+```{r}
+# for the secrecon genes that are DE in both RNA/PROT, highlight the consistent upregulated terms and label the ones that are similarly differentially expressed
+
+sr.process.ev <- c('ERpQC', 'Vesicle budding', 'PERK pathway', 'Co-translational translocation', 'N-glycan','Hydroxylysine','other')
+
+# assign unique colorpalette to metadata
+sec.ev.meta.colors.pg <- c('red','green','cornflowerblue','purple','darkgreen','darkkhaki','grey') #c('blue3','orange','green','darkkhaki','skyblue','yellow','red')
+
+names(sec.ev.meta.colors.pg) = sr.process.ev 
+sec.ev.meta.colors.pg
+```
+
+```{r}
+# generate manual legend
+
+# Sample data
+sdata <- data.frame(
+  x = rnorm(14),
+  y = rnorm(14),
+  group = factor(rep(1:7, each=2), labels = sr.process.ev))
+
+# Create scatter plot with custom legend
+ggplot(sdata, aes(x = x, y = y, color = group)) +
+  geom_point(size = 3) +
+  scale_color_manual(
+    values = sec.ev.meta.colors.pg,
+    name = "Process"  # Custom legend title
+  ) +
+  theme_minimal()
+```
+
+
+```{r}
+# label consistent genes, engineering targets in scatter plot
+sr.process.ev.genes <- unlist(sec.db[sr.process.ev])
+
+sr.process.ev.genes.color <- c()
+# sr.process.ev.genes.color.process <- c()
+for (g in l2fc.rp.sec.g) {
+  if (g %in% sr.process.ev.genes) {
+    # return matched process
+    g.process <- names(Filter(function(x) g %in% x, sec.db[sr.process.ev]))
+    # print(length(g.process))
+    sr.process.ev.genes.color = append(sr.process.ev.genes.color,sec.ev.meta.colors.pg[[g.process[[1]]]])
+
+  } else {sr.process.ev.genes.color = append(sr.process.ev.genes.color,'grey')
+
+}}
+
+names(sr.process.ev.genes.color) <- l2fc.rp.sec.g
+
+
+l2fc.rp.sec.g.targets <- c()
+
+for (g in sr.process.ev.genes) {
+  if (g %in% l2fc.rp.sec.g) {
+    # print(g)
+    if (sign(l2fc.rna.sec[[g]]) == sign(l2fc.pro.sec[[g]])) {
+      l2fc.rp.sec.g.targets = append(l2fc.rp.sec.g.targets,g)
+  }}}
+l2fc.rp.sec.g.targets
+```
+
+
+```{r fig.height=3, fig.width=4}
+# Create scatter plot
+l2fc.rp.sec.ev <- l2fc.rp.sec
+l2fc.rp.sec.ev$gene <- rownames(l2fc.rp.sec.ev)
+l2fc.rp.sec.ev$process <- sr.process.ev.genes.color
+
+ggplot(l2fc.rp.sec.ev, aes(x = rna.log2FC, y = pro.log2FC)) +
+  geom_point(aes(color = factor(names(sr.process.ev.genes.color))),
+                 size = 4,alpha=0.8) +  # Color points by label
+  scale_color_manual(values = sr.process.ev.genes.color) +  # Set custom colors  # Add labels for specific points
+  theme_minimal() + theme(legend.position="none",
+                          axis.text.x =element_text(size=12),
+                          axis.text.y =element_text(size=12),
+                          axis.title.x =element_text(size=12),
+                          axis.title.y =element_text(size=12)) + 
+  geom_segment(aes(x=0.58,xend=max(l2fc.rp.sec$rna.log2FC)+1,y=0.58,yend=0.58),color='darkgrey',linetype='longdash') +
+  geom_segment(aes(x=0.58,xend=0.58,y=0.58,yend=max(l2fc.rp.sec$pro.log2FC)+1),color='darkgrey',linetype='longdash') +
+  geom_segment(aes(x=-0.58,xend=min(l2fc.rp.sec$rna.log2FC)-1,y=-0.58,yend=-0.58),color='darkgrey',linetype='longdash') +
+  geom_segment(aes(x=-0.58,xend=-0.58,y=-0.58,yend=min(l2fc.rp.sec$pro.log2FC)-1),color='darkgrey',linetype='longdash') +
+  geom_hline(yintercept =0,color='black') +
+  geom_vline(xintercept =0,color='black') +
+  geom_label_repel(
+        data = l2fc.rp.sec.ev[l2fc.rp.sec.g.targets,],
+        aes(label = l2fc.rp.sec.ev[l2fc.rp.sec.g.targets,'gene']),
+        box.padding = 0.3,     # Adjust padding around labels
+        point.padding = 0.2,
+        # size = labSize,
+        segment.color = 'grey10',
+        segment.size = 0.5,
+        # arrow = arr,
+        colour = 'black',
+        fontface = 'plain',
+        parse = F,
+        na.rm = TRUE,
+        direction = 'both',
+        max.overlaps = 15,
+        min.segment.length = 0) +
+  xlab('RNA log2FC') + ylab('PROTEIN log2FC') 
+```
+
+
+```{r}
+# save.image("../data/2_gsva_limma.RData")
+```
+
