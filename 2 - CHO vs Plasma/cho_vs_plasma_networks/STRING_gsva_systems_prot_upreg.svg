@@ -6,7 +6,7 @@
    version="1.1"
    id="svg1800"
    sodipodi:docname="STRING_gsva_systems_prot_upreg.svg"
-   inkscape:version="1.2.1 (9c6d41e, 2022-07-14)"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -26,15 +26,15 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="pt"
      showgrid="false"
-     inkscape:zoom="0.26918598"
-     inkscape:cx="817.27883"
-     inkscape:cy="1263.0673"
-     inkscape:window-width="1689"
+     inkscape:zoom="0.26408559"
+     inkscape:cx="514.98455"
+     inkscape:cy="1546.847"
+     inkscape:window-width="1696"
      inkscape:window-height="922"
-     inkscape:window-x="140"
+     inkscape:window-x="95"
      inkscape:window-y="25"
      inkscape:window-maximized="0"
-     inkscape:current-layer="figure_1" />
+     inkscape:current-layer="axes_1" />
   <metadata
      id="metadata2">
     <rdf:RDF>
@@ -61,7 +61,7 @@
        inverse="true"
        flatten="false"
        hide_clip="false"
-       message="Use fill-rule evenodd on &lt;b&gt;fill and stroke&lt;/b&gt; dialog if no flatten result after convert clip to paths." />
+       message="" />
     <style
        type="text/css"
        id="style4">*{stroke-linejoin: round; stroke-linecap: butt}</style>
@@ -2750,11 +2750,13 @@
       </g>
       <g
          id="text_1"
-         transform="translate(-62.99723)">
+         transform="matrix(1.9456892,0,0,1.9456892,-881.76758,-1072.7653)"
+         style="fill:#0055d4">
         <!-- HSP90AA1 -->
         <g
            transform="matrix(0.25,0,0,-0.25,688.86588,1142.2275)"
-           id="g1087">
+           id="g1087"
+           style="fill:#0055d4">
           <defs
              id="defs1069">
             <path
@@ -2788,43 +2790,54 @@
           </defs>
           <use
              xlink:href="#LucidaGrande-48"
-             id="use1071" />
+             id="use1071"
+             style="fill:#0055d4" />
           <use
              xlink:href="#LucidaGrande-53"
              x="73.486328"
-             id="use1073" />
+             id="use1073"
+             style="fill:#0055d4" />
           <use
              xlink:href="#LucidaGrande-50"
              x="127.34375"
-             id="use1075" />
+             id="use1075"
+             style="fill:#0055d4" />
           <use
              xlink:href="#LucidaGrande-39"
              x="182.61719"
-             id="use1077" />
+             id="use1077"
+             style="fill:#0055d4" />
           <use
              xlink:href="#LucidaGrande-30"
              x="245.84961"
-             id="use1079" />
+             id="use1079"
+             style="fill:#0055d4" />
           <use
              xlink:href="#LucidaGrande-41"
              x="309.08203"
-             id="use1081" />
+             id="use1081"
+             style="fill:#0055d4" />
           <use
              xlink:href="#LucidaGrande-41"
              x="378.07617"
-             id="use1083" />
+             id="use1083"
+             style="fill:#0055d4" />
           <use
              xlink:href="#LucidaGrande-31"
              x="447.07031"
-             id="use1085" />
+             id="use1085"
+             style="fill:#0055d4" />
         </g>
       </g>
       <g
-         id="text_2">
+         id="text_2"
+         transform="matrix(1.9932952,0,0,1.9932952,-724.44027,-1303.2832)"
+         style="fill:#338000">
         <!-- RPN2 -->
         <g
            transform="matrix(0.25,0,0,-0.25,600.85477,1308.8394)"
-           id="g1103">
+           id="g1103"
+           style="fill:#338000">
           <defs
              id="defs1093">
             <path
@@ -2842,28 +2855,34 @@
           </defs>
           <use
              xlink:href="#LucidaGrande-52"
-             id="use1095" />
+             id="use1095"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-50"
              x="63.232422"
-             id="use1097" />
+             id="use1097"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-4e"
              x="118.50586"
-             id="use1099" />
+             id="use1099"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-32"
              x="192.38281"
-             id="use1101" />
+             id="use1101"
+             style="fill:#338000" />
         </g>
       </g>
       <g
          id="text_3"
-         transform="translate(8.9996058,-3.6914892)">
+         transform="matrix(1.9444882,0,0,1.9444882,-519.28519,-1276.3383)"
+         style="fill:#338000">
         <!-- ALG8 -->
         <g
            transform="matrix(0.25,0,0,-0.25,459.94089,1343.0922)"
-           id="g1119">
+           id="g1119"
+           style="fill:#338000">
           <defs
              id="defs1109">
             <path
@@ -2881,28 +2900,34 @@
           </defs>
           <use
              xlink:href="#LucidaGrande-41"
-             id="use1111" />
+             id="use1111"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-4c"
              x="68.994141"
-             id="use1113" />
+             id="use1113"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-47"
              x="122.31445"
-             id="use1115" />
+             id="use1115"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-38"
              x="194.58008"
-             id="use1117" />
+             id="use1117"
+             style="fill:#338000" />
         </g>
       </g>
       <g
          id="text_4"
-         transform="translate(8.9996058,-3.6914892)">
+         transform="matrix(1.9932952,0,0,1.9932952,-432.55215,-1281.644)"
+         style="fill:#338000">
         <!-- DPM1 -->
         <g
            transform="matrix(0.25,0,0,-0.25,330.20367,1281.887)"
-           id="g1134">
+           id="g1134"
+           style="fill:#338000">
           <defs
              id="defs1124">
             <path
@@ -2916,27 +2941,34 @@
           </defs>
           <use
              xlink:href="#LucidaGrande-44"
-             id="use1126" />
+             id="use1126"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-50"
              x="74.902344"
-             id="use1128" />
+             id="use1128"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-4d"
              x="130.17578"
-             id="use1130" />
+             id="use1130"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-31"
              x="216.30859"
-             id="use1132" />
+             id="use1132"
+             style="fill:#338000" />
         </g>
       </g>
       <g
-         id="text_5">
+         id="text_5"
+         transform="matrix(1.9932952,0,0,1.9932952,-729.11164,-1349.7747)"
+         style="fill:#aa0000">
         <!-- DERL2 -->
         <g
            transform="matrix(0.25,0,0,-0.25,736.41681,1381.7574)"
-           id="g1150">
+           id="g1150"
+           style="fill:#aa0000">
           <defs
              id="defs1138">
             <path
@@ -2946,23 +2978,28 @@
           </defs>
           <use
              xlink:href="#LucidaGrande-44"
-             id="use1140" />
+             id="use1140"
+             style="fill:#aa0000" />
           <use
              xlink:href="#LucidaGrande-45"
              x="74.902344"
-             id="use1142" />
+             id="use1142"
+             style="fill:#aa0000" />
           <use
              xlink:href="#LucidaGrande-52"
              x="129.10156"
-             id="use1144" />
+             id="use1144"
+             style="fill:#aa0000" />
           <use
              xlink:href="#LucidaGrande-4c"
              x="192.33398"
-             id="use1146" />
+             id="use1146"
+             style="fill:#aa0000" />
           <use
              xlink:href="#LucidaGrande-32"
              x="245.6543"
-             id="use1148" />
+             id="use1148"
+             style="fill:#aa0000" />
         </g>
       </g>
       <g
@@ -2975,38 +3012,49 @@
            id="path954" />
       </g>
       <g
-         id="text_6">
+         id="text_6"
+         transform="matrix(1.9932952,0,0,1.9932952,-721.28457,-1454.8472)"
+         style="fill:#aa0000">
         <!-- DERL1 -->
         <g
            transform="matrix(0.25,0,0,-0.25,748.57839,1470.1307)"
-           id="g1163">
+           id="g1163"
+           style="fill:#aa0000">
           <use
              xlink:href="#LucidaGrande-44"
-             id="use1153" />
+             id="use1153"
+             style="fill:#aa0000" />
           <use
              xlink:href="#LucidaGrande-45"
              x="74.902344"
-             id="use1155" />
+             id="use1155"
+             style="fill:#aa0000" />
           <use
              xlink:href="#LucidaGrande-52"
              x="129.10156"
-             id="use1157" />
+             id="use1157"
+             style="fill:#aa0000" />
           <use
              xlink:href="#LucidaGrande-4c"
              x="192.33398"
-             id="use1159" />
+             id="use1159"
+             style="fill:#aa0000" />
           <use
              xlink:href="#LucidaGrande-31"
              x="245.6543"
-             id="use1161" />
+             id="use1161"
+             style="fill:#aa0000" />
         </g>
       </g>
       <g
-         id="text_7">
+         id="text_7"
+         transform="matrix(1.9456892,0,0,1.9456892,-719.59125,-1073.0819)"
+         style="fill:#338000">
         <!-- MOGS -->
         <g
            transform="matrix(0.25,0,0,-0.25,768.4913,1128.8486)"
-           id="g1177">
+           id="g1177"
+           style="fill:#338000">
           <defs
              id="defs1167">
             <path
@@ -3016,28 +3064,34 @@
           </defs>
           <use
              xlink:href="#LucidaGrande-4d"
-             id="use1169" />
+             id="use1169"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-4f"
              x="86.132812"
-             id="use1171" />
+             id="use1171"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-47"
              x="163.81836"
-             id="use1173" />
+             id="use1173"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-53"
              x="236.08398"
-             id="use1175" />
+             id="use1175"
+             style="fill:#338000" />
         </g>
       </g>
       <g
          id="text_8"
-         transform="translate(0,5.5372338)">
+         transform="matrix(2.0432892,0,0,2.0432892,-712.09813,-1277.238)"
+         style="fill:#0055d4">
         <!-- P4HB -->
         <g
            transform="matrix(0.25,0,0,-0.25,694.81046,1248.9967)"
-           id="g1192">
+           id="g1192"
+           style="fill:#0055d4">
           <defs
              id="defs1182">
             <path
@@ -3051,27 +3105,34 @@
           </defs>
           <use
              xlink:href="#LucidaGrande-50"
-             id="use1184" />
+             id="use1184"
+             style="fill:#0055d4" />
           <use
              xlink:href="#LucidaGrande-34"
              x="55.273438"
-             id="use1186" />
+             id="use1186"
+             style="fill:#0055d4" />
           <use
              xlink:href="#LucidaGrande-48"
              x="118.50586"
-             id="use1188" />
+             id="use1188"
+             style="fill:#0055d4" />
           <use
              xlink:href="#LucidaGrande-42"
              x="191.99219"
-             id="use1190" />
+             id="use1190"
+             style="fill:#0055d4" />
         </g>
       </g>
       <g
-         id="text_9">
+         id="text_9"
+         transform="matrix(1.9456892,0,0,1.9456892,-999.80849,-1073.1394)"
+         style="fill:#338000">
         <!-- MGAT4A -->
         <g
            transform="matrix(0.25,0,0,-0.25,1026.4154,1127.3856)"
-           id="g1210">
+           id="g1210"
+           style="fill:#338000">
           <defs
              id="defs1196">
             <path
@@ -3081,66 +3142,84 @@
           </defs>
           <use
              xlink:href="#LucidaGrande-4d"
-             id="use1198" />
+             id="use1198"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-47"
              x="86.132812"
-             id="use1200" />
+             id="use1200"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-41"
              x="158.39844"
-             id="use1202" />
+             id="use1202"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-54"
              x="227.39258"
-             id="use1204" />
+             id="use1204"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-34"
              x="290.625"
-             id="use1206" />
+             id="use1206"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-41"
              x="353.85742"
-             id="use1208" />
+             id="use1208"
+             style="fill:#338000" />
         </g>
       </g>
       <g
-         id="text_10">
+         id="text_10"
+         transform="matrix(1.9932952,0,0,1.9932952,-913.32307,-1173.4678)"
+         style="fill:#338000">
         <!-- MAN1B1 -->
         <g
            transform="matrix(0.25,0,0,-0.25,875.89415,1181.0491)"
-           id="g1225">
+           id="g1225"
+           style="fill:#338000">
           <use
              xlink:href="#LucidaGrande-4d"
-             id="use1213" />
+             id="use1213"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-41"
              x="86.132812"
-             id="use1215" />
+             id="use1215"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-4e"
              x="155.12695"
-             id="use1217" />
+             id="use1217"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-31"
              x="229.00391"
-             id="use1219" />
+             id="use1219"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-42"
              x="292.23633"
-             id="use1221" />
+             id="use1221"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-31"
              x="349.75586"
-             id="use1223" />
+             id="use1223"
+             style="fill:#338000" />
         </g>
       </g>
       <g
-         id="text_11">
+         id="text_11"
+         transform="matrix(1.9456892,0,0,1.9456892,-788.033,-1163.9036)"
+         style="fill:#338000">
         <!-- UGGT1 -->
         <g
            transform="matrix(0.25,0,0,-0.25,862.06246,1317.8341)"
-           id="g1241">
+           id="g1241"
+           style="fill:#338000">
           <defs
              id="defs1229">
             <path
@@ -3150,32 +3229,39 @@
           </defs>
           <use
              xlink:href="#LucidaGrande-55"
-             id="use1231" />
+             id="use1231"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-47"
              x="69.287109"
-             id="use1233" />
+             id="use1233"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-47"
              x="141.55273"
-             id="use1235" />
+             id="use1235"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-54"
              x="213.81836"
-             id="use1237" />
+             id="use1237"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-31"
              x="277.05078"
-             id="use1239" />
+             id="use1239"
+             style="fill:#338000" />
         </g>
       </g>
       <g
          id="text_12"
-         transform="translate(-52.497693,27.686173)">
+         transform="matrix(1.9444882,0,0,1.9444882,-581.30584,-509.39071)"
+         style="fill:#44aa00">
         <!-- SEC16A -->
         <g
            transform="matrix(0.25,0,0,-0.25,571.84314,662.35424)"
-           id="g1260">
+           id="g1260"
+           style="fill:#44aa00">
           <defs
              id="defs1246">
             <path
@@ -3189,91 +3275,114 @@
           </defs>
           <use
              xlink:href="#LucidaGrande-53"
-             id="use1248" />
+             id="use1248"
+             style="fill:#44aa00" />
           <use
              xlink:href="#LucidaGrande-45"
              x="53.857422"
-             id="use1250" />
+             id="use1250"
+             style="fill:#44aa00" />
           <use
              xlink:href="#LucidaGrande-43"
              x="108.05664"
-             id="use1252" />
+             id="use1252"
+             style="fill:#44aa00" />
           <use
              xlink:href="#LucidaGrande-31"
              x="177.24609"
-             id="use1254" />
+             id="use1254"
+             style="fill:#44aa00" />
           <use
              xlink:href="#LucidaGrande-36"
              x="240.47852"
-             id="use1256" />
+             id="use1256"
+             style="fill:#44aa00" />
           <use
              xlink:href="#LucidaGrande-41"
              x="303.71094"
-             id="use1258" />
+             id="use1258"
+             style="fill:#44aa00" />
         </g>
       </g>
       <g
-         id="text_13">
+         id="text_13"
+         style="fill:#338000"
+         transform="matrix(1.9456892,0,0,1.9456892,-935.58887,-1040.2913)">
         <!-- MGAT1 -->
         <g
            transform="matrix(0.25,0,0,-0.25,1026.6118,1197.789)"
-           id="g1273">
+           id="g1273"
+           style="fill:#338000">
           <use
              xlink:href="#LucidaGrande-4d"
-             id="use1263" />
+             id="use1263"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-47"
              x="86.132812"
-             id="use1265" />
+             id="use1265"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-41"
              x="158.39844"
-             id="use1267" />
+             id="use1267"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-54"
              x="227.39258"
-             id="use1269" />
+             id="use1269"
+             style="fill:#338000" />
           <use
              xlink:href="#LucidaGrande-31"
              x="290.625"
-             id="use1271" />
+             id="use1271"
+             style="fill:#338000" />
         </g>
       </g>
       <g
          id="text_14"
-         transform="translate(16.499276,5.5372338)">
+         transform="matrix(1.9456892,0,0,1.9456892,-523.00444,-594.35398)"
+         style="fill:#44aa00">
         <!-- SAR1A -->
         <g
            transform="matrix(0.25,0,0,-0.25,584.81797,641.0845)"
-           id="g1286">
+           id="g1286"
+           style="fill:#44aa00">
           <use
              xlink:href="#LucidaGrande-53"
-             id="use1276" />
+             id="use1276"
+             style="fill:#44aa00" />
           <use
              xlink:href="#LucidaGrande-41"
              x="53.857422"
-             id="use1278" />
+             id="use1278"
+             style="fill:#44aa00" />
           <use
              xlink:href="#LucidaGrande-52"
              x="122.85156"
-             id="use1280" />
+             id="use1280"
+             style="fill:#44aa00" />
           <use
              xlink:href="#LucidaGrande-31"
              x="186.08398"
-             id="use1282" />
+             id="use1282"
+             style="fill:#44aa00" />
           <use
              xlink:href="#LucidaGrande-41"
              x="249.31641"
-             id="use1284" />
+             id="use1284"
+             style="fill:#44aa00" />
         </g>
       </g>
       <g
          id="text_15"
-         transform="translate(-8.9996058,-20.303193)">
+         transform="matrix(1.9456892,0,0,1.9456892,-555.36095,-604.93523)"
+         style="fill:#44aa00">
         <!-- SEC23B -->
         <g
            transform="matrix(0.25,0,0,-0.25,568.1413,614.64331)"
-           id="g1304">
+           id="g1304"
+           style="fill:#44aa00">
           <defs
              id="defs1290">
             <path
@@ -3283,103 +3392,128 @@
           </defs>
           <use
              xlink:href="#LucidaGrande-53"
-             id="use1292" />
+             id="use1292"
+             style="fill:#44aa00" />
           <use
              xlink:href="#LucidaGrande-45"
              x="53.857422"
-             id="use1294" />
+             id="use1294"
+             style="fill:#44aa00" />
           <use
              xlink:href="#LucidaGrande-43"
              x="108.05664"
-             id="use1296" />
+             id="use1296"
+             style="fill:#44aa00" />
           <use
              xlink:href="#LucidaGrande-32"
              x="177.24609"
-             id="use1298" />
+             id="use1298"
+             style="fill:#44aa00" />
           <use
              xlink:href="#LucidaGrande-33"
              x="240.47852"
-             id="use1300" />
+             id="use1300"
+             style="fill:#44aa00" />
           <use
              xlink:href="#LucidaGrande-42"
              x="303.71094"
-             id="use1302" />
+             id="use1302"
+             style="fill:#44aa00" />
         </g>
       </g>
       <g
          id="text_16"
-         transform="translate(14.999342,18.457448)">
+         transform="matrix(1.9456892,0,0,1.9456892,-754.03387,-1139.9422)"
+         style="fill:#7137c8">
         <!-- SSR3 -->
         <g
            transform="matrix(0.25,0,0,-0.25,674.52945,1345.5363)"
-           id="g1315">
+           id="g1315"
+           style="fill:#7137c8">
           <use
              xlink:href="#LucidaGrande-53"
-             id="use1307" />
+             id="use1307"
+             style="fill:#7137c8" />
           <use
              xlink:href="#LucidaGrande-53"
              x="53.857422"
-             id="use1309" />
+             id="use1309"
+             style="fill:#7137c8" />
           <use
              xlink:href="#LucidaGrande-52"
              x="107.71484"
-             id="use1311" />
+             id="use1311"
+             style="fill:#7137c8" />
           <use
              xlink:href="#LucidaGrande-33"
              x="170.94727"
-             id="use1313" />
+             id="use1313"
+             style="fill:#7137c8" />
         </g>
       </g>
       <g
-         id="text_17">
+         id="text_17"
+         transform="matrix(1.9456892,0,0,1.9456892,-770.49056,-1172.2331)"
+         style="fill:#7137c8">
         <!-- SSR1 -->
         <g
            transform="matrix(0.25,0,0,-0.25,661.2114,1335.7844)"
-           id="g1326">
+           id="g1326"
+           style="fill:#7137c8">
           <use
              xlink:href="#LucidaGrande-53"
-             id="use1318" />
+             id="use1318"
+             style="fill:#7137c8" />
           <use
              xlink:href="#LucidaGrande-53"
              x="53.857422"
-             id="use1320" />
+             id="use1320"
+             style="fill:#7137c8" />
           <use
              xlink:href="#LucidaGrande-52"
              x="107.71484"
-             id="use1322" />
+             id="use1322"
+             style="fill:#7137c8" />
           <use
              xlink:href="#LucidaGrande-31"
              x="170.94727"
-             id="use1324" />
+             id="use1324"
+             style="fill:#7137c8" />
         </g>
       </g>
       <g
          id="text_18"
-         transform="translate(5.9997372,11.074468)">
+         transform="matrix(1.9456892,0,0,1.9456892,-861.77106,-1110.6451)"
+         style="fill:#7137c8">
         <!-- SRP9 -->
         <g
            transform="matrix(0.25,0,0,-0.25,922.57537,1203.1355)"
-           id="g1337">
+           id="g1337"
+           style="fill:#7137c8">
           <use
              xlink:href="#LucidaGrande-53"
-             id="use1329" />
+             id="use1329"
+             style="fill:#7137c8" />
           <use
              xlink:href="#LucidaGrande-52"
              x="53.857422"
-             id="use1331" />
+             id="use1331"
+             style="fill:#7137c8" />
           <use
              xlink:href="#LucidaGrande-50"
              x="117.08984"
-             id="use1333" />
+             id="use1333"
+             style="fill:#7137c8" />
           <use
              xlink:href="#LucidaGrande-39"
              x="172.36328"
-             id="use1335" />
+             id="use1335"
+             style="fill:#7137c8" />
         </g>
       </g>
       <g
          id="legend_1"
-         transform="translate(-36.676354,182.90377)">
+         transform="matrix(1.2579655,0,0,1.4436171,-370.10873,42.425079)">
         <g
            id="patch_136">
           <path
@@ -3917,7 +4051,7 @@
       </g>
       <g
          id="legend_2"
-         transform="matrix(0.99988429,0,0,1.0890665,89.369323,-731.2594)">
+         transform="matrix(1.5010714,0,0,1.6349557,-36.803132,-1588.2005)">
         <g
            id="patch_143">
           <path
