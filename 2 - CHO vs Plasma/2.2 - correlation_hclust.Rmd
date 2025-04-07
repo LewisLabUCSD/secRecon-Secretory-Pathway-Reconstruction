@@ -520,6 +520,456 @@ print(p)
 
 ```
 
+# RNA vs PROTEIN - secRecon CHO vs murine plasma correlations
+focus on proteome -- CHO vs plasma correlations w.r.t. secRecon processes - identify processes where these trends don't hold
+```{r}
+# average expression amongst species and perform correlation
+## whole proteome
+cho.plasma.avg <- list()
+# cho.plasma$rna_raw
+
+cho.plasma.avg$rna_data <- data.frame(CHO = rowMeans(cho.plasma$rna_data[,c(CHO_DG44.t,CHO_K1.t)],na.rm=T),
+                                      murine.plasma = rowMeans(cho.plasma$rna_data[,c(MPC.t,P3X.t)],na.rm=T))
+
+cho.plasma.avg$pro_data <- data.frame(CHO = rowMeans(cho.plasma$pro_data[,c(CHO_DG44.p,CHO_K1.p)],na.rm=T), murine.plasma = rowMeans(cho.plasma$pro_data[,c(MPC.p,P3X.p)],na.rm=T))
+
+## secrecon
+cho.plasma.avg$rna_sec <- data.frame(CHO = rowMeans(cho.plasma$rna_sec[,c(CHO_DG44.t,CHO_K1.t)],na.rm=T),
+                                      murine.plasma = rowMeans(cho.plasma$rna_sec[,c(MPC.t,P3X.t)],na.rm=T))
+
+cho.plasma.avg$pro_sec <- data.frame(CHO = rowMeans(cho.plasma$pro_sec[,c(CHO_DG44.p,CHO_K1.p)],na.rm=T), murine.plasma = rowMeans(cho.plasma$pro_sec[,c(MPC.p,P3X.p)],na.rm=T))
+
+lapply(cho.plasma.avg,dim)
+```
+
+```{r}
+cho.plasma.avg.cl <- list()
+
+cho.plasma.avg.cl$rna<- data.frame(
+  CHO.DG44 = rowMeans(cho.plasma$rna_data[,CHO_DG44.t],na.rm=T),
+  CHO.K1  = rowMeans(cho.plasma$rna_data[,CHO_K1.t],na.rm=T),
+  MPC = rowMeans(cho.plasma$rna_data[,MPC.t],na.rm=T),
+  P3X = rowMeans(cho.plasma$rna_data[,P3X.t],na.rm=T))
+
+cho.plasma.avg.cl$pro<- data.frame(
+  CHO.DG44 = rowMeans(cho.plasma$pro_data[,CHO_DG44.p],na.rm=T),
+  CHO.K1  = rowMeans(cho.plasma$pro_data[,CHO_K1.p],na.rm=T),
+  MPC = rowMeans(cho.plasma$pro_data[,MPC.p],na.rm=T),
+  P3X = rowMeans(cho.plasma$pro_data[,P3X.p],na.rm=T))
+
+genes.sr.tp <- intersect(unlist(sec.db),intersect(rownames(cho.plasma.avg.cl$rna),rownames(cho.plasma.avg.cl$pro))) # 605 genes
+
+cho.plasma.avg.cl.corr <- list()
+
+for (cl in c('CHO.DG44','CHO.K1','MPC','P3X')) {
+  # cho.plasma.avg.cl.corr[[cl]] = list()
+  temp.df = list()
+  for (g in names(sec.db)) {
+    # get genes in both transcriptome/proteome
+    g.genes <- intersect(sec.db[[g]],genes.sr.tp)
+    
+    if (length(g.genes) > 10) {
+      g.cor.test <- cor.test(cho.plasma.avg.cl$rna[g.genes,cl], cho.plasma.avg.cl$pro[g.genes,cl], method = "spearman")
+      g.coef <- round(g.cor.test$estimate, 3)  # Spearman correlation coefficient
+      g.pv <- signif(g.cor.test$p.value, 3) 
+      
+      # cho.plasma.avg.cl.corr[[cl]][[g]] 
+      temp.df[[g]] <- data.frame(term = g, scc = g.coef, p.value=g.pv)
+    }}
+  # Convert list to dataframe
+  results_df <- bind_rows(temp.df)
+  rownames(results_df) <- results_df$term
+  # Adjust p-values using Benjamini-Hochberg (BH) correction
+  results_df$BH_pvalue <- p.adjust(results_df$p.value, method = "BH")
+  results_df$log10pv <- -log10(results_df$BH_pvalue)
+  cho.plasma.avg.cl.corr[[cl]] = results_df
+    }
+
+cho.plasma.avg.cl.corr
+```
+```{r fig.height=4, fig.width=5}
+
+for (cl in c('CHO.DG44','CHO.K1','MPC','P3X')) {
+  df.viz <- cho.plasma.avg.cl.corr[[cl]]
+  df.discord <- rownames(subset(df.viz,scc<0.1))
+  # df.viz$highlight <- ifelse(df.viz$scc < 0.3, rownames(df.viz), NaN)
+  # df.colors <- ev.df.cl.viz$cho$color
+  p <- EnhancedVolcano(df.viz,
+                       x='scc',y='BH_pvalue',
+      lab = rownames(df.viz),
+      labSize=7,
+      selectLab = df.discord,
+      # colCustom = df.colors,
+      # selectLab = sr.process.ev.cl$cho,
+      boxedLabels = TRUE,
+      drawConnectors = T, widthConnectors = 1.0,
+      # lengthConnectors=unit(0.05, "npc"),
+      # min.segment.length=0,
+      arrowheads = F,
+      FCcutoff = 0.3,
+      # min.segment.length=1,
+      colConnectors = 'black',
+      colGradient=c('grey','blue2'),
+      xlab='scc',
+      ylab='-log10 (adj.p-value)',
+      # x = 'logFC',
+      # y = 'adj.P.Val',
+      xlim=c(-1,1), #c(min(df.viz$logFC),max(df.viz$logFC)),
+      ylim=c(0,ifelse(max(df.viz$log10pv) == Inf,15,max(df.viz$log10pv))),
+      pCutoff=0.05,
+      shadeAlpha = 1,
+      pointSize=8,subtitle='') + ggtitle(paste(cl,'RNA vs Protein')) + theme(legend.position="none",plot.title = element_text(hjust = 0.5)) #+ scale_color_manual(values=sec.meta.colors.pg) + guides(color = guide_legend(title='System')) + theme(legend.position = 'right')
+  
+  ## uncomment above lines to create a manual legend for fianl figures
+  ggsave(paste(cl,"sr_RNAvPROT.svg",sep='_'), plot = p, width = 10, height = 8)
+
+  # print(p)
+  }
+```
+
+```{r}
+for (cl in names(cho.plasma.avg.cl.corr)) {
+  print(head(cho.plasma.avg.cl.corr[[cl]] %>% arrange(scc)))
+}
+# lapply(cho.plasma.avg.cl.corr,arrange(scc))
+```
+
+
+get processes that are concordant for RNA to protein (r>0.3), and ones that are not correlated (r<0.1)
+
+```{r}
+cho.plasma.avg.cl.corr.concord <- lapply(cho.plasma.avg.cl.corr,function(x) {subset(x,scc > 0.3)$term})
+
+cho.plasma.avg.cl.corr.discord <- lapply(cho.plasma.avg.cl.corr,function(x) {subset(x,scc < 0.1)$term})
+```
+
+
+venndiagram of concordant and discordant/impacted processes
+```{r fig.height=3, fig.width=3}
+p <- ggVennDiagram::ggVennDiagram(cho.plasma.avg.cl.corr.concord,
+                             label='count',label_alpha=0,label_size = 6) + scale_fill_distiller(palette='RdBu') + scale_x_continuous(expand=expansion(mult=0.2))
+# print(p)
+ggsave("venn_cord.svg", plot = p, width = 5, height = 5)
+
+p <- ggVennDiagram::ggVennDiagram(cho.plasma.avg.cl.corr.discord,
+                             label='count',label_alpha=0,label_size = 6) + scale_fill_distiller(palette='RdBu') + scale_x_continuous(expand=expansion(mult=0.2))
+ggsave("venn_discord.svg", plot = p, width = 5, height = 5)
+
+```
+
+
+```{r}
+# Iterate over the list and generate scatter plots + Spearman correlation
+for (i in names(cho.plasma.avg)) {
+  df <- cho.plasma.avg[[i]]  # Select dataframe
+  
+  # Compute Spearman correlation
+  cor_test <- cor.test(df$CHO, df$murine.plasma, method = "spearman")
+  cor_coef <- round(cor_test$estimate, 3)  # Spearman correlation coefficient
+  p_value <- signif(cor_test$p.value, 3)   # p-value
+  
+  # Generate scatter plot
+  plot <- ggplot(df, aes(x = CHO, y = murine.plasma)) +
+    geom_point(color = "blue", alpha = 0.6) +  # Scatter plot points
+    geom_smooth(method = "lm", color = "red", se = FALSE) +  # Regression line
+    ggtitle(paste("CHO vs murine plasma", i)) +
+    annotate("text", x = min(df$columnA), y = max(df$columnB),
+             label = paste("Spearman r =", cor_coef, "\nP-value =", p_value),
+             hjust = 0, size = 5, color = "black") +
+    theme_minimal()
+  
+  # Print plot
+  print(plot)
+  
+  # Print correlation results in console
+  cat(paste("\nData", i, "- Spearman Correlation:", cor_coef, "P-value:", p_value, "\n"))
+}
+
+```
+
+identify the genes are outliers in terms of CHO vs murine plasma -- by using differential expression test
+are differentially expressed genes overrepresented terms and thus coordinated, or are they specific effectors/passengers in subpathways, or random? 
+```{r}
+# read in metabolic genesets ## contact Lewis Lab for this data
+mgs <- read.csv('./filtered_metabolic_genes.csv')
+mgs.db <- list()
+for (s in unique(mgs$system)) {
+  mgs.db[[s]] = subset(mgs,system == s)$Human.Gene.Name
+}
+lapply(mgs.db,length)
+```
+
+plot RNA vs Protein L2FC, highlight secRecon and metabolic genes and respective correlation coefficients
+```{r fig.height=2, fig.width=2.5}
+length(l2fc.rna) # 5052 DEG
+length(l2fc.prot) # 1563 DA prot
+
+# head(l2fc.prot)
+# 
+l2fc.mrg <- dplyr::full_join(
+  data.frame(gene=names(l2fc.rna),l2fc.rna = as.numeric(l2fc.rna)),
+    data.frame(gene=names(l2fc.prot),l2fc.pro = as.numeric(l2fc.prot))
+,by='gene')
+
+l2fc.mrg.sr <- subset(l2fc.mrg,gene %in% unlist(sec.db))
+
+cor_test <- cor.test(l2fc.mrg$l2fc.rna, l2fc.mrg$l2fc.pro, method = "spearman")
+cor_coef <- round(cor_test$estimate, 3)  # Spearman correlation coefficient
+p_value <- signif(cor_test$p.value, 3)   # p-value
+
+
+# Add a new column to classify genes
+l2fc.mrg$color_group <- ifelse(l2fc.mrg$gene %in% unlist(sec.db), "secRecon", "rest")
+l2fc.mrg$color_metab <- ifelse(l2fc.mrg$gene %in% unlist(mgs.db),
+                               'metab','rest')
+
+# Generate scatter plot
+plot <- ggplot(l2fc.mrg, aes(x = l2fc.rna, y = l2fc.pro,color = color_group)) +
+  geom_point(alpha = 0.6) +
+  # scale_color_identity() +# Scatter plot points
+  # color = "Legend") +  # Custom x-axis label & legend title
+  scale_color_manual(values = c("secRecon" = "blue", "rest" = "grey")) +  # Assign colors
+  geom_vline(color='seagreen3',xintercept=1,linetype='dashed') +
+  geom_vline(color='seagreen3',xintercept=-1,linetype='dashed') +
+    geom_hline(color='seagreen3',yintercept=1,linetype='dashed') +
+  geom_hline(color='seagreen3',yintercept=-1,linetype='dashed') +
+  geom_smooth(method = "lm", color = "firebrick", se = FALSE, size = 0.5) +  # Regression line
+  ggtitle(paste("CHO vs murine plasma")) +
+  theme_minimal() +
+  theme(panel.grid = element_blank(),
+        plot.subtitle = element_text(size = 10, face = "italic", color = "gray38"), legend.position = "none") +
+  labs(x = 'log2FC (RNA)', y = 'log2FC (Protein)',
+       subtitle =paste('Spearman r:',cor_coef,'p-value',p_value)) # color = "Legend"
+
+# Print plot
+print(plot)
+```
+
+```{r fig.height=2, fig.width=2.5}
+# Generate scatter plot
+plot <- ggplot(l2fc.mrg, aes(x = l2fc.rna, y = l2fc.pro,color = color_metab)) +
+  geom_point(alpha = 0.6) +
+  # scale_color_identity() +# Scatter plot points
+  # color = "Legend") +  # Custom x-axis label & legend title
+  scale_color_manual(values = c("metab" = "tomato", "rest" = "grey")) +  # Assign colors
+  geom_vline(color='seagreen3',xintercept=1,linetype='dashed') +
+  geom_vline(color='seagreen3',xintercept=-1,linetype='dashed') +
+    geom_hline(color='seagreen3',yintercept=1,linetype='dashed') +
+  geom_hline(color='seagreen3',yintercept=-1,linetype='dashed') +
+  geom_smooth(method = "lm", color = "firebrick", se = FALSE, size = 0.5) +  # Regression line
+  ggtitle(paste("CHO vs murine plasma")) +
+  theme_minimal() +
+  theme(panel.grid = element_blank(),
+        plot.subtitle = element_text(size = 10, face = "italic", color = "gray38"), legend.position = "none") +
+  labs(x = 'log2FC (RNA)', y = 'log2FC (Protein)',
+       subtitle =paste('Spearman r:',cor_coef,'p-value',p_value)) # color = "Legend"
+
+# Print plot
+print(plot)
+```
+```{r}
+# corr of just secRecon genes
+dim(l2fc.mrg.sr)
+
+cor.test(l2fc.mrg.sr$l2fc.rna, l2fc.mrg.sr$l2fc.pro, method = "spearman")
+# cor_coef <- round(cor_test$estimate, 3)  # Spearman correlation coefficient
+# p_value <- signif(cor_test$p.value, 3)   # p-value
+
+
+# corr of metab genes
+cor.test(subset(l2fc.mrg,gene %in% unlist(mgs.db))$l2fc.rna,
+         subset(l2fc.mrg,gene %in% unlist(mgs.db))$l2fc.pro,
+         method='spearman')
+
+```
+
+
+subset for secRecon terms
+```{r}
+for (s in names(sec.db)) {
+  print(paste(s,length(sec.db[[s]]),nrow(subset(l2fc.mrg,gene %in% sec.db[[s]]))))
+}
+```
+
+
+
+discordant genes analysis, pathway enrichment
+```{r}
+l2fc.threshold = 1
+l2fc.grps <- list()
+l2fc.grps[['concordant']] = subset(l2fc.mrg,abs(l2fc.rna) >= l2fc.threshold & abs(l2fc.pro) >= l2fc.threshold)
+
+l2fc.grps[['rna-up_pro_down']] = subset(l2fc.mrg,l2fc.rna >= l2fc.threshold & l2fc.pro < -l2fc.threshold)
+
+l2fc.grps[['rna-down_pro_up']] = subset(l2fc.mrg,l2fc.rna < -l2fc.threshold & l2fc.pro >= l2fc.threshold)
+
+l2fc.grps[['discordant']] <- rbind(l2fc.grps[['rna-up_pro_down']],l2fc.grps[['rna-down_pro_up']]) # 94
+
+
+l2fc.grps
+```
+
+ORA/hypergeometric test using GO and secRecon terms
+- no terms are overrepresented in the discordant DEGs, suggesting that individual genes are discordant between RNA vs protein, but not necessarily at aggregate pathway-level activity--consistent with the dendrogram analysis from gene to pathway-level. 
+```{r}
+# import GO genesets (includes objects go.bp, go.cc, go.mf)
+load('../data/msigdb_gobp_gocc_cp.RData')
+
+gs.all <- c(go.bp,sec.db)
+
+# Background genes (total number of genes in the universe)
+ora.bgrnd <- rownames(cho.plasma$pro_data)  # Define universe from genesets
+
+l2fc.grps.ora <- list()
+
+for (i in names(l2fc.grps)[-1]) {
+  gene_list = l2fc.grps[[i]]$gene
+  # Perform hypergeometric test for each pathway
+  ora_results <- lapply(names(gs.all), function(gs) {
+    overlap <- sum(gene_list %in% gs.all[[gs]])  # Number of overlapping genes
+    geneset_size <- length(gs.all[[gs]])         # Total genes in the pathway
+    total_genes <- length(ora.bgrnd)        # Universe size
+    test_genes <- length(gene_list)                # Total genes in input list
+    
+    # Compute p-value using hypergeometric test
+    p_value <- phyper(overlap - 1, geneset_size, total_genes - geneset_size, test_genes, lower.tail = FALSE)
+    
+    return(data.frame(Term = gs, Overlap = overlap, PValue = p_value))})
+  
+  # Combine results into a dataframe
+  ora_df <- bind_rows(ora_results)
+  
+  # Adjust p-values for multiple testing (Benjamini-Hochberg)
+  ora_df <- ora_df %>%
+    mutate(FDR = p.adjust(PValue, method = "BH")) %>%
+    arrange(FDR)
+    # filter(FDR < 0.05)  # Filter significant pathways
+    
+  l2fc.grps.ora[[i]] = ora_df
+}
+
+l2fc.grps.ora
+```
+
+
+```{r}
+# ggplot(cho.plasma$pro_data, aes_string(x = 'log2_CHO-DG44-mAb1_Rep1_intensity_sum', y = 'log2_MPC11_Rep1_intensity_sum')) +
+#     geom_point(color = "blue", alpha = 0.6)
+
+# ggplot(reshape2::melt(cho.plasma$pro_data,id.vars = NULL), aes(value, variable)) +
+#   geom_point(alpha = 0.6, color = "blue") +
+#   facet_wrap(~variable, scales = "free") +
+#   theme_minimal()
+
+plot <- ggpairs(cho.plasma$pro_data[,c(MPC.p[1],P3X.p[1],CHO_DG44.p[1],CHO_K1.p[1])], 
+                lower = list(continuous = wrap("points", alpha = 0.6, color = "blue",size = 0.5)),  # Scatter plots in lower triangle
+                upper = list(continuous = wrap("cor", method = "spearman")),  # Correlation coefficients in upper triangle
+                diag = list(continuous = "density"))  # Density plots on the diagonal
+
+# Display plot
+print(plot)
+```
+which specific process may be impacted for each cell line
+```{r}
+# iterate across secrecon processes and compare CHO vs murine plasma avg expression
+cho.plasma.avg.sr.cl <- list()
+for (i in c('rna_sec','pro_sec')) {
+  results_list <- list() # init results list
+  
+  for (gs in names(sec.db)) {
+    gs.df <- subset(cho.plasma.avg[[i]],rownames(cho.plasma.avg[[i]]) %in% sec.db[[gs]])
+    if (nrow(gs.df) > 10) {
+      cor_test <- cor.test(gs.df$CHO, gs.df$murine.plasma, method = "spearman")
+      
+      results_list[[gs]] <- data.frame(term = gs,
+    scc = cor_test$estimate,
+    pvalue = cor_test$p.value)
+    }}
+  
+  # Convert list to dataframe
+  results_df <- bind_rows(results_list)
+
+  # Adjust p-values using Benjamini-Hochberg (BH) correction
+  results_df$BH_pvalue <- p.adjust(results_df$pvalue, method = "BH")
+  
+  cho.plasma.avg.sr[[i]] <- results_df
+  cho.plasma.avg.sr[[paste(i,'sig',sep="-")]] <- subset(results_df,BH_pvalue < 0.05)
+      # cor_coef <- round(gs.corr$estimate, 3)  # Spearman correlation coefficient
+      # p_value <- signif(gs.corr$p.value, 3)
+      # 
+      # cat(paste("\n", gs, "- SCC:", cor_coef, "P-value:", p_value, "\n"))
+}
+cho.plasma.avg.sr
+```
+
+are specific secRecon processes impacted?
+```{r}
+# iterate across secrecon processes and compare CHO vs murine plasma avg expression
+cho.plasma.avg.sr <- list()
+for (i in c('rna_sec','pro_sec')) {
+  results_list <- list() # init results list
+  
+  for (gs in names(sec.db)) {
+    gs.df <- subset(cho.plasma.avg[[i]],rownames(cho.plasma.avg[[i]]) %in% sec.db[[gs]])
+    if (nrow(gs.df) > 10) {
+      cor_test <- cor.test(gs.df$CHO, gs.df$murine.plasma, method = "spearman")
+      
+      results_list[[gs]] <- data.frame(term = gs,
+    scc = cor_test$estimate,
+    pvalue = cor_test$p.value)
+    }}
+  
+  # Convert list to dataframe
+  results_df <- bind_rows(results_list)
+
+  # Adjust p-values using Benjamini-Hochberg (BH) correction
+  results_df$BH_pvalue <- p.adjust(results_df$pvalue, method = "BH")
+  
+  cho.plasma.avg.sr[[i]] <- results_df
+  cho.plasma.avg.sr[[paste(i,'sig',sep="-")]] <- subset(results_df,BH_pvalue < 0.05)
+      # cor_coef <- round(gs.corr$estimate, 3)  # Spearman correlation coefficient
+      # p_value <- signif(gs.corr$p.value, 3)
+      # 
+      # cat(paste("\n", gs, "- SCC:", cor_coef, "P-value:", p_value, "\n"))
+}
+cho.plasma.avg.sr
+```
+```{r}
+# merge the results and sig-results to compare transcriptome vs proteomics correlations
+sr.rna.prot.scc <- inner_join(cho.plasma.avg.sr$rna_sec, cho.plasma.avg.sr$pro_sec, by = "term", suffix = c("_rna", "_pro"))
+
+# Calculate Spearman correlation
+cor_result <- cor.test(sr.rna.prot.scc$scc_rna, sr.rna.prot.scc$scc_pro, method = "spearman")
+
+# Scatterplot with correlation
+ggplot(sr.rna.prot.scc, aes(x = scc_rna, y = scc_pro)) +
+  geom_point(color = "blue", size = 3, alpha = 0.7) +
+  scale_y_continuous(limits=c(0,1)) +
+  scale_x_continuous(limits=c(0,1)) +
+  geom_vline(xintercept=0.3,linetype='dashed') +
+  geom_hline(yintercept=0.3,linetype='dashed') +
+  # geom_smooth(method = "lm", color = "red", linetype = "dashed") +
+  labs(title = "Scatterplot of SCC between RNA and Protein",
+       x = "SCC (RNA)",
+       y = "SCC (Protein)",
+       subtitle = paste0("Spearman ρ = ", round(cor_result$estimate, 3), 
+                         ", p = ", signif(cor_result$p.value, 3))) +
+  theme_minimal()
+```
+```{r}
+scc.threshold = 0.3
+
+sr.rna.prot.scc.grps <- list()
+sr.rna.prot.scc.grps[['concordant']] = subset(sr.rna.prot.scc,scc_rna >= scc.threshold & scc_pro >= scc.threshold)
+
+sr.rna.prot.scc.grps[['rna_high_pro_low']] = subset(sr.rna.prot.scc,scc_rna >= scc.threshold & scc_pro < scc.threshold)
+
+sr.rna.prot.scc.grps[['pro_high_rna_low']] = subset(sr.rna.prot.scc,scc_rna < scc.threshold & scc_pro >= scc.threshold)
+
+sr.rna.prot.scc.grps
+```
+
+
 # secRecon GSVA- or pathway-level correlation
 
 sample-level pairwise spearman correlation
