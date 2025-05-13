@@ -6745,34 +6745,6 @@
            id="ytick_8" />
       </g>
       <g
-         id="patch_273">
-        <path
-           d="M 7.2,2224.8 V 7.2"
-           style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:square;stroke-linejoin:miter"
-           id="path2615" />
-      </g>
-      <g
-         id="patch_274">
-        <path
-           d="M 1807.2,2224.8 V 7.2"
-           style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:square;stroke-linejoin:miter"
-           id="path2618" />
-      </g>
-      <g
-         id="patch_275">
-        <path
-           d="m 7.2,2224.8 h 1800"
-           style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:square;stroke-linejoin:miter"
-           id="path2621" />
-      </g>
-      <g
-         id="patch_276">
-        <path
-           d="m 7.2,7.2 h 1800"
-           style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:square;stroke-linejoin:miter"
-           id="path2624" />
-      </g>
-      <g
          id="text_1"
          transform="matrix(1.9446064,0,0,1.9446064,-497.1242,-1301.152)"
          style="fill:#338000">

@@ -26,9 +26,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="pt"
      showgrid="false"
-     inkscape:zoom="0.26408559"
-     inkscape:cx="514.98455"
-     inkscape:cy="1546.847"
+     inkscape:zoom="0.22483509"
+     inkscape:cx="1392.1314"
+     inkscape:cy="1336.5351"
      inkscape:window-width="1696"
      inkscape:window-height="922"
      inkscape:window-x="95"
@@ -2719,34 +2719,6 @@
            id="ytick_7" />
         <g
            id="ytick_8" />
-      </g>
-      <g
-         id="patch_132">
-        <path
-           d="M 7.2,2224.8 V 7.2"
-           style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:square;stroke-linejoin:miter"
-           id="path1050" />
-      </g>
-      <g
-         id="patch_133">
-        <path
-           d="M 1807.2,2224.8 V 7.2"
-           style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:square;stroke-linejoin:miter"
-           id="path1053" />
-      </g>
-      <g
-         id="patch_134">
-        <path
-           d="m 7.2,2224.8 h 1800"
-           style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:square;stroke-linejoin:miter"
-           id="path1056" />
-      </g>
-      <g
-         id="patch_135">
-        <path
-           d="m 7.2,7.2 h 1800"
-           style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:square;stroke-linejoin:miter"
-           id="path1059" />
       </g>
       <g
          id="text_1"
