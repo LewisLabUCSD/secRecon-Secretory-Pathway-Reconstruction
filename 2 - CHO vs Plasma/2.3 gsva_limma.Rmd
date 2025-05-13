@@ -12,9 +12,10 @@ library(tidyr)
 library(dplyr)
 library(EnhancedVolcano)
 ```
+
 ```{r}
 # load in GSVA and data image from previous notebook
-load(".,/data/1_correlation_hclust.RData")
+# load("../data/1_correlation_hclust.RData")
 ```
 
 
@@ -38,6 +39,7 @@ prot.groups$cho <- c(CHO_DG44.p,CHO_K1.p)
 prot.groups$mm <- c(MPC.p,P3X.p)
 ```
 
+# generate limma models
 ```{r}
 # generate model (comparison: mus plasma vs CHO)
 mod.meta.factor <- as.factor(c(rep('mm',6),rep('cho',6)))
@@ -47,7 +49,34 @@ colnames(mod) <- c("int", "MMvsCHO")
 mod
 ```
 
-fit limma models
+```{r}
+# generate models for intraspecies analyses
+## rna:
+### human: JK vs Karpas
+### mu: MPC vs P3X63
+### CHO: CHO-DG44 vs CHO-K1
+
+# rna.groups$cho <- c(CHO_DG44.t,CHO_K1.t)
+# rna.groups$mm <- c(MPC.t,P3X.t)
+# rna.groups$hu <- c(JK.t,Karpas.t)
+
+## prot:
+### mu: MPC vs P3X63
+### CHO: CHO-DG44 vs CHO-K1
+
+cl.comparisons = list('cho'='CHO-DG44.vs.CHO-K1',
+                      'mm'='MPC.vs.P3X63',
+                      'hu'='JK.vs.Karpas')
+
+mod.meta.factor.cl <- as.factor(c(rep('CL2',3),rep('CL1',3)))
+mod.cl <- model.matrix(~ factor(mod.meta.factor.cl))
+mod.cl
+colnames(mod.cl) <- c("int", "CL2vsCL1")
+mod.cl
+```
+
+
+# fit limma models
 ```{r}
 gsva.limma.fit <- list()
 gsva.limma.fit$rna <- eBayes(lmFit(cho.plasma.gsva[,c(rna.groups$mm,rna.groups$cho)], mod))
@@ -59,6 +88,24 @@ lapply(gsva.limma.res,summary)
 
 ```
 
+```{r}
+# fit models for intraspecies comparisons
+gsva.limma.fit.cl <- list()
+
+for (species in c('cho','mm','hu')) {
+  gsva.limma.fit.cl[[paste('rna',cl.comparisons[[species]],sep='_')]] <- eBayes(lmFit(cho.plasma.gsva[,rna.groups[[species]]], mod.cl))
+}
+
+for (species in c('cho','mm')) {
+  gsva.limma.fit.cl[[paste('pro',cl.comparisons[[species]],sep='_')]] <- eBayes(lmFit(cho.plasma.gsva.pro[,prot.groups[[species]]], mod.cl))
+}
+
+gsva.limma.res.cl <- lapply(gsva.limma.fit.cl,function(x) decideTests(x, p.value=0.05))
+
+lapply(gsva.limma.res.cl,summary)
+```
+
+# limma results
 refer to GSVA vignette on interpretation of logFC as difference in activity, where the magnitude difference and stringency should not be directly interpreted like expression fold-change
 https://www.bioconductor.org/packages/release/bioc/vignettes/GSVA/inst/doc/GSVA.html#62_Differential_expression_at_pathway_level
 
@@ -79,18 +126,63 @@ gsva.limma.sig$rna <- subset(gsva.limma.tt$rna, adj.P.Val<0.05)
 gsva.limma.sig$pro <- subset(gsva.limma.tt$pro, adj.P.Val<0.05)
 ```
 
+
+```{r}
+# extract significant results for intraspecies cell lines
+gsva.limma.tt.cl <- lapply(gsva.limma.fit.cl, function(x) {topTable(x,coef=2,number=length(sec.db))})
+  
+gsva.limma.sig.cl <- lapply(gsva.limma.tt.cl, function(x) {
+  subset(x,adj.P.Val<0.05)})
+
+gsva.limma.sig.cl.up <- lapply(gsva.limma.sig.cl, function(x) {
+  subset(x,logFC > 0)})
+
+gsva.limma.sig.cl.down <- lapply(gsva.limma.sig.cl, function(x) {
+  subset(x,logFC < 0)})
+
+gsva.limma.sig.cl
+```
+
+
 identify differential process at both RNA and protein level
 ```{r}
 intersect(rownames(gsva.limma.tt$rna.up),rownames(gsva.limma.tt$pro.up))
 intersect(rownames(gsva.limma.tt$rna.down),rownames(gsva.limma.tt$pro.down))
 ```
 
-# visualize differential GSVA pathways
-generated volcano plots
+intraspecies -- differential terms for rna and protein
 ```{r}
+intersect(rownames(gsva.limma.sig.cl$`rna_CHO-DG44.vs.CHO-K1`),
+          rownames(gsva.limma.sig.cl$`pro_CHO-DG44.vs.CHO-K1`)) # 28 terms (3 are from Feizi db)
+
+# intersect(rownames(gsva.limma.sig.cl$rna_MPC.vs.P3X63),
+#           rownames(gsva.limma.sig.cl$`pro_MPC.vs.P3X63`))
+# "Lysosomal degradation/Glyco-conjugate degradation"
+```
+
+
+# visualize differential GSVA pathways
+generate volcano plots
+
+
+```{r}
+# interspecies CHO vs plasma
 # define secRecon processes differential at rna and protein level
 sr.process.ev <- c('ERpQC', 'Vesicle budding', 'PERK pathway', 'Co-translational translocation', 'N-glycan','Hydroxylysine')
 ```
+
+```{r}
+# at intraspecies/cell line level
+sr.process.ev.cl <- list(
+  'cho' = grep('f_',c(
+    intersect(rownames(gsva.limma.sig.cl.up$`rna_CHO-DG44.vs.CHO-K1`),rownames(gsva.limma.sig.cl.up$`pro_CHO-DG44.vs.CHO-K1`)),
+    intersect(rownames(gsva.limma.sig.cl.down$`rna_CHO-DG44.vs.CHO-K1`),rownames(gsva.limma.sig.cl.down$`pro_CHO-DG44.vs.CHO-K1`)))
+    ,invert = T,value = T),
+  'mu' = intersect(rownames(gsva.limma.sig.cl$rna_MPC.vs.P3X63),
+                   rownames(gsva.limma.sig.cl$`pro_MPC.vs.P3X63`)))
+```
+
+
 
 ```{r}
 # assign unique colorpalette to metadata
@@ -123,9 +215,35 @@ for (i in rownames(ev.df)) {
 names(ev.df.col) <- rownames(ev.df)
 ```
 
+```{r}
+# create color legend for intraspecies cell line plots
+ev.df.cl <- list('cho'=gsva.limma.tt.cl$`rna_CHO-DG44.vs.CHO-K1`,
+                 'mm'=gsva.limma.tt.cl$rna_MPC.vs.P3X63)
 
+
+ev.df.cl.viz <- lapply(ev.df.cl,function(x) {
+  x.sr <- x[!grepl('f_',rownames(x)),] # remove feizi rows
+  print(dim(x.sr))
+  # print(head(rownames(x.sr)))
+  print(head(x.sr))
+  x.col <- c()
+  # return(x.sr)
+  for (i in rownames(x.sr)) {
+    print(i)
+    print(x.sr[i,'adj.P.Val'])
+    if (x.sr[i,'adj.P.Val'] > 0.05) {x.col <- append(x.col,'grey')} else {i.p <- sec.meta[i,'sec.parents']
+      x.col <- append(x.col,sec.meta.colors.pg[[i.p]])}}
+  names(x.col) <- rownames(x.sr)
+  return(list('data'=x.sr,'color'=x.col))
+  })
+
+# ev.df.cl.viz$cho$color
+```
+
+
+volcano plot for RNA- PCD (murine plasma) vs CHO
 ```{r fig.height=4, fig.width=5}
-EnhancedVolcano(ev.df,
+p <- EnhancedVolcano(ev.df,
     lab = rownames(ev.df),
     colCustom = ev.df.col,
     selectLab = sr.process.ev,
@@ -145,15 +263,80 @@ EnhancedVolcano(ev.df,
     ylim=c(0,-log10(min(ev.df$adj.P.Val))),
     pCutoff=0.05,
     shadeAlpha = 1,
-    pointSize=8,
-    ) + theme(legend.position="none") #+ scale_color_manual(values=sec.meta.colors.pg) + guides(color = guide_legend(title='System')) + theme(legend.position = 'right')
+    pointSize=8,subtitle='') + ggtitle('GSVA - PCD vs CHO (RNA)') + theme(legend.position="none",plot.title = element_text(hjust = 0.5)) #+ scale_color_manual(values=sec.meta.colors.pg) + guides(color = guide_legend(title='System')) + theme(legend.position = 'right')
 
 ## uncomment above lines to create a manual legend for fianl figures
+
+ggsave("gsva_rna.svg", plot = p, width = 10, height = 8)
+```
+
+volcano plot for RNA- CHO intraspecies
+```{r fig.height=4, fig.width=5}
+df.viz <- ev.df.cl.viz$cho$data
+df.colors <- ev.df.cl.viz$cho$color
+p <- EnhancedVolcano(df.viz,
+    lab = rownames(df.viz),
+    colCustom = df.colors,
+    selectLab = sr.process.ev.cl$cho,
+    boxedLabels = TRUE,
+    drawConnectors = T, widthConnectors = 1.0,
+    # lengthConnectors=unit(0.05, "npc"),
+    # min.segment.length=0,
+    arrowheads = F,
+    FCcutoff = 0,
+    # min.segment.length=1,
+    colConnectors = 'black',
+    xlab='GSVA score enrichment difference',
+    ylab='-log10 (adj.p-value)',
+    x = 'logFC',
+    y = 'adj.P.Val',
+    xlim=c(min(df.viz$logFC),max(df.viz$logFC)),
+    ylim=c(0,-log10(min(df.viz$adj.P.Val))),
+    pCutoff=0.05,
+    shadeAlpha = 1,
+    pointSize=8,subtitle='') + ggtitle(paste('GSVA -',cl.comparisons$cho,'(RNA)')) + theme(legend.position="none",plot.title = element_text(hjust = 0.5)) #+ scale_color_manual(values=sec.meta.colors.pg) + guides(color = guide_legend(title='System')) + theme(legend.position = 'right')
+
+## uncomment above lines to create a manual legend for fianl figures
+
+print(p)
+# ggsave("cho_gsva_rna.svg", plot = p, width = 10, height = 8)
+```
+
+volcano plot for RNA- murine intraspecies
+```{r fig.height=4, fig.width=5}
+df.viz <- ev.df.cl.viz$mm$data
+df.colors <- ev.df.cl.viz$mm$color
+p <- EnhancedVolcano(df.viz,
+    lab = rownames(df.viz),
+    colCustom = df.colors,
+    selectLab = sr.process.ev.cl$mu,
+    boxedLabels = TRUE,
+    drawConnectors = T, widthConnectors = 1.0,
+    # lengthConnectors=unit(0.05, "npc"),
+    # min.segment.length=0,
+    arrowheads = F,
+    FCcutoff = 0,
+    # min.segment.length=1,
+    colConnectors = 'black',
+    xlab='GSVA score enrichment difference',
+    ylab='-log10 (adj.p-value)',
+    x = 'logFC',
+    y = 'adj.P.Val',
+    xlim=c(min(df.viz$logFC),max(df.viz$logFC)),
+    ylim=c(0,-log10(min(df.viz$adj.P.Val))),
+    pCutoff=0.05,
+    shadeAlpha = 1,
+    pointSize=8,subtitle='') + ggtitle(paste('GSVA -',cl.comparisons$mm,'(RNA)')) + theme(legend.position="none",plot.title = element_text(hjust = 0.5)) #+ scale_color_manual(values=sec.meta.colors.pg) + guides(color = guide_legend(title='System')) + theme(legend.position = 'right')
+
+## uncomment above lines to create a manual legend for fianl figures
+
+print(p)
+# ggsave("mm_gsva_rna.svg", plot = p, width = 10, height = 8)
 ```
 
 PROTEIN GSVA volcano plot
 ```{r}
-# create color legend
+# create color legend for CHO vs murine plasma
 ev.df <- gsva.limma.tt$pro
 
 # remove feizi rows
@@ -170,7 +353,26 @@ for (i in rownames(ev.df)) {
 names(ev.df.col) <- rownames(ev.df)
 ```
 
+```{r}
+# create color legend for intraspecies cell line viz
+ev.df.cl <- list('cho'=gsva.limma.tt.cl$`pro_CHO-DG44.vs.CHO-K1`,
+                 'mm'=gsva.limma.tt.cl$pro_MPC.vs.P3X63)
 
+
+ev.df.cl.viz <- lapply(ev.df.cl,function(x) {
+  x.sr <- x[!grepl('f_',rownames(x)),] # remove feizi rows
+  x.col <- c()
+  for (i in rownames(x.sr)) {
+    if (x.sr[i,'adj.P.Val'] > 0.05) {x.col <- append(x.col,'grey')} else {i.p <- sec.meta[i,'sec.parents']
+      x.col <- append(x.col,sec.meta.colors.pg[[i.p]])}}
+  names(x.col) <- rownames(x.sr)
+  return(list('data'=x.sr,'color'=x.col))
+  })
+
+# ev.df.cl.viz$cho$color
+```
+
+volcano for CHO vs murine plasma
 ```{r fig.height=4, fig.width=5}
 EnhancedVolcano(ev.df,
     lab = rownames(ev.df),
@@ -192,10 +394,82 @@ EnhancedVolcano(ev.df,
     ylim=c(0,-log10(min(ev.df$adj.P.Val))),
     pCutoff=0.05,
     shadeAlpha = 1,
-    pointSize=8,
-    ) + theme(legend.position="none") #+ scale_color_manual(values=sec.meta.colors.pg) + guides(color = guide_legend(title='System')) + theme(legend.position = 'right')
+    pointSize=8,subtitle='') + ggtitle('GSVA - PCD vs CHO (Protein)') + theme(legend.position="none",plot.title = element_text(hjust = 0.5))
+     #+ scale_color_manual(values=sec.meta.colors.pg) + guides(color = guide_legend(title='System')) + theme(legend.position = 'left')
+
+###### UNCOMMENT above lines to create a manual legend for fianl figures
+ 
+#   geom_rect(aes(xmin = -0.21, xmax = -0.1, ymin = 5, ymax = 5.5), fill = "white", color = "black") +
+#   theme(plot.title = element_text(hjust = 0.5),  # Center the title
+#       legend.position = "none") +  # Remove default legend
+#   annotate("text", x = -0.21, y = 5.8, label = "System", fontface = "bold", hjust = 0,size = 6)
+# annotate("text", x = -0.21, y = 5.7, label = "● Proteostasis", color = "blue3", hjust = 0) 
+
+ggsave("gsva_prot.svg", plot = p, width = 10, height = 8)
+```
+
+volcano plot for RNA- CHO intraspecies
+```{r fig.height=4, fig.width=5}
+df.viz <- ev.df.cl.viz$cho$data
+df.colors <- ev.df.cl.viz$cho$color
+p <- EnhancedVolcano(df.viz,
+    lab = rownames(df.viz),
+    colCustom = df.colors,
+    selectLab = sr.process.ev.cl$cho,
+    boxedLabels = TRUE,
+    drawConnectors = T, widthConnectors = 1.0,
+    # lengthConnectors=unit(0.05, "npc"),
+    # min.segment.length=0,
+    arrowheads = F,
+    FCcutoff = 0,
+    # min.segment.length=1,
+    colConnectors = 'black',
+    xlab='GSVA score enrichment difference',
+    ylab='-log10 (adj.p-value)',
+    x = 'logFC',
+    y = 'adj.P.Val',
+    xlim=c(min(df.viz$logFC),max(df.viz$logFC)),
+    ylim=c(0,-log10(min(df.viz$adj.P.Val))),
+    pCutoff=0.05,
+    shadeAlpha = 1,
+    pointSize=8,subtitle='') + ggtitle(paste('GSVA -',cl.comparisons$cho,'(Protein)')) + theme(legend.position="none",plot.title = element_text(hjust = 0.5)) #+ scale_color_manual(values=sec.meta.colors.pg) + guides(color = guide_legend(title='System')) + theme(legend.position = 'right')
 
 ## uncomment above lines to create a manual legend for fianl figures
+
+print(p)
+# ggsave("cho_gsva_prot.svg", plot = p, width = 10, height = 8)
+```
+
+volcano plot for RNA- murine intraspecies
+```{r fig.height=4, fig.width=5}
+df.viz <- ev.df.cl.viz$mm$data
+df.colors <- ev.df.cl.viz$mm$color
+p <- EnhancedVolcano(df.viz,
+    lab = rownames(df.viz),
+    colCustom = df.colors,
+    selectLab = sr.process.ev.cl$mu,
+    boxedLabels = TRUE,
+    drawConnectors = T, widthConnectors = 1.0,
+    # lengthConnectors=unit(0.05, "npc"),
+    # min.segment.length=0,
+    arrowheads = F,
+    FCcutoff = 0,
+    # min.segment.length=1,
+    colConnectors = 'black',
+    xlab='GSVA score enrichment difference',
+    ylab='-log10 (adj.p-value)',
+    x = 'logFC',
+    y = 'adj.P.Val',
+    xlim=c(min(df.viz$logFC),max(df.viz$logFC)),
+    ylim=c(0,-log10(min(df.viz$adj.P.Val))),
+    pCutoff=0.05,
+    shadeAlpha = 1,
+    pointSize=8,subtitle='') + ggtitle(paste('GSVA -',cl.comparisons$mm,'(Protein)')) + theme(legend.position="none",plot.title = element_text(hjust = 0.5)) #+ scale_color_manual(values=sec.meta.colors.pg) + guides(color = guide_legend(title='System')) + theme(legend.position = 'right')
+
+## uncomment above lines to create a manual legend for fianl figures
+
+print(p)
+# ggsave("mm_gsva_prot.svg", plot = p, width = 10, height = 8)
 ```
 
 dotplot version of significant differential GSVA scores
